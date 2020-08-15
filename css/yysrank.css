@@ -1,0 +1,82 @@
+.container {
+  max-width: 1600px;
+}
+
+.shishen-button{
+	background:transparent;	
+	border-width:0px;	
+    outline:none;	
+}
+
+.detail-button{
+	background:transparent;	
+	border-width:0px;	
+    outline:none;	
+}
+
+.hr-line-solid{border-top:1px solid #D3D3D3;color:#fff;background-color:#FAEBD7;height:1px;margin:20px 0}
+
+.table tbody tr td{
+    text-align: center;
+    vertical-align: middle;
+}
+
+#shishen-rank-table tbody tr td{
+    text-align: left!important;
+    vertical-align: middle;
+}
+
+.progress {
+    position: relative;
+}
+
+.progress p{
+    position: absolute;
+    top:50%;
+    font-size: 16px;
+    /* left:50%; */
+}
+
+#tooltip {
+    background: #333;
+    color: white;
+    font-weight: bold;
+    padding: 4px 8px;
+    font-size: 13px;
+    border-radius: 4px;
+    display: none;
+  }
+
+  #tooltip[data-show] {
+    display: block;
+  }
+
+  #arrow,
+  #arrow::before {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    z-index: -1;
+  }
+
+  #arrow::before {
+    content: '';
+    transform: rotate(45deg);
+    background: #333;
+  }
+
+  #tooltip[data-popper-placement^='top'] > #arrow {
+    bottom: -4px;
+  }
+
+  #tooltip[data-popper-placement^='bottom'] > #arrow {
+    top: -4px;
+  }
+
+  #tooltip[data-popper-placement^='left'] > #arrow {
+    right: -4px;
+  }
+
+  #tooltip[data-popper-placement^='right'] > #arrow {
+    left: -4px;
+  }

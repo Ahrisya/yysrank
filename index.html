@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>YYS</title>
+    <!-- 3rd party css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.18/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-table@1.17.1/dist/bootstrap-table.min.css">
+    <!-- my css -->
+    <link rel="stylesheet" href="css/yysrank.css">
+</head>
+
+<body>
+    <div class="container">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="team-win-rate-tab" data-toggle="tab" href="#team-win-rate" role="tab"
+                    aria-controls="team-win-rate" aria-selected="true">阵容胜率查询</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="shishen-rank-tab" data-toggle="tab" href="#shishen-rank" role="tab"
+                    aria-controls="shishen-rank" aria-selected="false">排行榜</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="team-recommand-tab" data-toggle="tab" href="#team-recommand" role="tab"
+                    aria-controls="team-recommand" aria-selected="false">阵容推荐</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="tutorial-tab" data-toggle="tab" href="#tutorial" role="tab"
+                    aria-controls="tutorial" aria-selected="false">食用指南</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="team-win-rate" role="tabpanel"
+                aria-labelledby="team-win-rate-tab">
+                <p>
+                    <font color="C0C0C0" size="2">数据来源于各服前百名斗技记录，每周一 12:00 ~ 14:00 更新，上次更新：08/13/2020</font>
+                </p>
+                <p></p>
+                <h4>阵容设置</h4>
+                <div class="table-responsive">
+                    <table class="table table-hover table-borderless">
+                        <thead>
+                            <tr>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: right; vertical-align: middle;"><span style="color: red;">*
+                                    </span>己方阵容</td>
+                                <td><select class="form-control selectpicker" multiple data-live-search="true"
+                                        data-max-options="5" data-style="btn-info" id="select-own-shishen"></select>
+                                </td>
+                                <td><button type="button" class="btn btn-success"
+                                        onclick="addShishen(true)">添加式神</button></td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>
+                                    <div id="own-team">
+
+                                    </div>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right; vertical-align: middle;">对方阵容</td>
+                                <td><select class="form-control selectpicker" multiple data-live-search="true"
+                                        data-max-options="5" data-style="btn-info" id="select-enemy-shishen"></select>
+                                </td>
+                                <td><button type="button" class="btn btn-success"
+                                        onclick="addShishen(false)">添加式神</button></td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>
+                                    <div id="enemy-team">
+
+                                    </div>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <font color="C0C0C0" size="2">* 仅计算外战胜率，即己方阵容不包含于对方阵容时的胜率。胜率因人而异，仅作参考。</font>
+                                </td>
+                                <td></td>
+                            </tr>
+
+                            <tr>
+                                <td></td>
+                                <td style="text-align: center;">
+                                    <button type="button" class="btn btn-primary" onclick="queryWinRate()">查询胜率</button>
+                                    &nbsp;&nbsp;
+                                    <button type="button" class="btn btn-secondary" onclick="resetTeams()">重置</button>
+                                </td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p></p>
+                <div class="hr-line-solid"></div>
+                <div id="result-panel">
+                    <p></p>
+                    <h4>查询历史</h4>
+                    <p>
+                        <font color="C0C0C0" size="2">点击表格标题栏的小箭头排序，点击更多显示详细胜率。</font>
+                    </p>
+                    <table id="query-result">
+
+                    </table>
+                </div>
+                <div class="modal fade" id="detailed-result" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                    role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-content" style="width: 1200px;">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="detailed-result-label">查询结果</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="progress" id="query-progress" style="display: none;">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                        id="query-progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0"
+                                        aria-valuemax="100" style="width: 0%;">
+
+                                    </div>
+                                </div>
+                                <table id="detailed-query-result">
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="shishen-rank" role="tabpanel" aria-labelledby="shishen-rank-tab">
+                <p>
+                <p></p>
+                <h4 style="text-align: center;">式神外战每周胜率榜&nbsp;<img id="info-img" src="assets/img/info-circle-fill.svg"
+                        alt="" width="16" height="16"></h4>
+                <div id="tooltip" role="tooltip">
+                    胜率因人而异，仅作参考。
+                    <div id="arrow" data-popper-arrow></div>
+                </div>
+
+                <p style="text-align: center;">
+                    <font color="C0C0C0" size="2">数据来源于各服前百名斗技记录，仅列出场次大于100的式神, 上次更新：08/13/2020</font>
+                </p>
+                <table id="shishen-rank-table">
+
+                </table>
+                </p>
+            </div>
+            <div class="tab-pane fade" id="team-recommand" role="tabpanel" aria-labelledby="team-recommand-tab">
+                <p></p>
+                <h4>Under construction……</h4>
+            </div>
+            <div class="tab-pane fade" id="tutorial" role="tabpanel" aria-labelledby="tutorial-tab">
+                <p></p>
+                <div class="container" style="max-width: 80%;">
+                    <div class="row">
+                        <h4>使用方法</h4>
+                    </div>
+                    <div class="row">
+                        <ul>
+                            <br>
+                            <li>
+                                视频演示：<a href="#"> 食用指南</a>
+                            </li>
+                            <br>
+                            <li>
+                                设置己方阵容：选好式神后（式神一次可多选）点击添加式神，即可把选中的式神加入己方阵容。阵容中有重复式神的话可以通过多次添加完成设置。
+                            </li>
+                            <br>
+                            <li>
+                                可以通过双击式神头像从己方阵容中删除式神。
+                            </li>
+                            <br>
+                            <li>
+                                对方阵容通过同样的方法设置，也可以忽略不填，此时会计算己方阵容在所有情况下的外战胜率。
+                            </li>
+                            <br>
+                            <li>
+                                稍等几秒会显示结果弹窗，可以通过点击表头的箭头进行排序。PS：一般1s以内就可以出结果，等待时间过长的话可能是资源加载失败，建议刷新网页。
+                            </li>
+                            <br>
+                            <li>
+                                每次计算的结果都会保留下来，可以通过点击查询历史的“更多”显示。
+                            </li>
+                            <br>
+                        </ul>
+                    </div>
+                    <div class="hr-line-solid"></div>
+                    <div class="row">
+                        发现bug或者有好的建议的话欢迎联系（联系方式见下方）。
+                    </div>
+                    <div class="hr-line-solid"></div>
+                    <div class="row">
+                        <h4>已知问题</h4>
+                    </div>
+                    <div class="row">
+                        <ul>
+                            <br>
+                            <li>
+                                网站是搭建在Github上的（使用国内服务器的话要备案，太麻烦了），CDN用的是jsDelivr和Unpkg，国内访问可能会加载缓慢甚至失败，此时可以刷新试试，之后有空的话会试试用vercel加速。熟悉html和js的小伙伴也可以去Github上clone下来，把用到的css和js下载到本地使用。
+                            </li>
+                            <br>
+                            <li>
+                                手机屏看排行榜的话可能会因为过挤而显示不完全，建议手机看的话浏览器开启桌面版模式（手机Chrome的话：设置->桌面版网站，打上勾就可以了）。
+                            </li>
+                            <br>
+                        </ul>
+                    </div>
+                    <div class="hr-line-solid"></div>
+                    <div class="row">
+                        <h4>TODO</h4>
+                    </div>
+                    <div class="row">
+                        <ul>
+                            <br>
+                            <li>
+                                阵容推荐，预计8月底完成。
+                            </li>
+                            <br>
+                        </ul>
+                    </div>
+                    <div class="hr-line-solid"></div>
+                    <div class="row">
+                        <h4>Contact</h4>
+                    </div>
+                    <div class="row">
+                        <ul>
+                            <br>
+                            <li>
+                                个人主页：<a href="https://ahrisy.com">Ahrisy&nbsp;の&nbsp;小窝</a>, 欢迎来转转呀~
+                            </li>
+                            <br>
+                            <li>
+                                Github：<a href="#">本项目的Github仓库</a>
+                            </li>
+                            <br>
+                            <li>
+                                bilibili私信：<a href="https://space.bilibili.com/4847326">Ahrisy的个人空间</a>
+                            </li>
+                            <br>
+                            <li>
+                                阴阳师：鸣麓逐浪区，昵称：Ahrisy，id：1689046
+                            </li>
+                            <br>
+                            <li>
+                                QQ: 1282519861 (发QQ邮箱也可，但可能回复会比较慢)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3rd party javascript -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.18/dist/js/bootstrap-select.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.18/dist/js/i18n/defaults-zh_CN.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.17.1/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <!-- tooltip -->
+    <script>
+        const button = document.querySelector('#info-img');
+        const tooltip = document.querySelector('#tooltip');
+
+        let popperInstance = null;
+
+        function create() {
+            popperInstance = Popper.createPopper(button, tooltip, {
+                modifiers: [
+                    {
+                        name: 'offset',
+                        options: {
+                            offset: [0, 8],
+                        },
+                    },
+                ],
+            });
+        }
+
+        function destroy() {
+            if (popperInstance) {
+                popperInstance.destroy();
+                popperInstance = null;
+            }
+        }
+
+        function show() {
+            tooltip.setAttribute('data-show', '');
+            create();
+        }
+
+        function hide() {
+            tooltip.removeAttribute('data-show');
+            destroy();
+        }
+
+        const showEvents = ['mouseenter', 'focus'];
+        const hideEvents = ['mouseleave', 'blur'];
+
+        showEvents.forEach(event => {
+            button.addEventListener(event, show);
+        });
+
+        hideEvents.forEach(event => {
+            button.addEventListener(event, hide);
+        });
+    </script>
+    <!-- my js -->
+    <script src="js/yysrank.js"></script>
+</body>
+
+</html>
