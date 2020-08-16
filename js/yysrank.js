@@ -1,6 +1,5 @@
 // global variables
 var shishen_json
-var data
 var ownteam = []
 var enemyteam = []
 var historynum = 0
@@ -8,19 +7,8 @@ var queryhistory = {}
 
 window.onload = function () {
     initOptions()
-    loadData()
     initTables()
     initShishenRank()
-}
-
-function loadData() {
-    var url = "json/data.json"
-    var request = new XMLHttpRequest()
-    request.open("get", url)
-    request.send(null)
-    request.onload = function () {
-        data = JSON.parse(request.responseText)
-    }
 }
 
 function initOptions() {

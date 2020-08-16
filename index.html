@@ -13,9 +13,48 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-table@1.17.1/dist/bootstrap-table.min.css">
     <!-- my css -->
     <link rel="stylesheet" href="css/yysrank.css">
+    <style>
+        .loading {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<script>
+    var data
+    var url = "json/data.json"
+    var request = new XMLHttpRequest()
+    request.open("get", url)
+    request.send(null)
+    request.onload = function () {
+        console.log(request.status)
+        if (request.status == 200)
+        {
+            data = JSON.parse(request.responseText)
+            document.getElementById("loadingDiv").style.display="none";
+        }
+        else {
+            document.getElementById("loadingDiv").style.display="none";
+            alert("数据加载失败,请尝试刷新网页！\n错误代码： " + String(request.status))
+        }
+        
+    }
+</script>
 </head>
 
 <body>
+    <!-- loading -->
+    <div id="loadingDiv" style="display: block; ">
+        <div id="over"
+            style=" position: absolute;top: 0;left: 0; width: 100%;height: 100%; background-color: #f5f5f5;opacity:0.5;z-index: 1000;">
+        </div>
+        <div id="layout"
+            style="position: absolute;top: 40%; left: 40%;width: 20%; height: 20%;  z-index: 1001;text-align:center;">
+            <img src="assets/img/loading.gif" /></div>
+    </div>'
+
+    <!-- main body -->
     <div class="container">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
@@ -149,11 +188,7 @@
                 <p>
                 <p></p>
                 <h4 style="text-align: center;">式神外战每周胜率榜&nbsp;<img id="info-img" src="assets/img/info-circle-fill.svg"
-                        alt="" width="16" height="16"></h4>
-                <div id="tooltip" role="tooltip">
-                    胜率因人而异，仅作参考。
-                    <div id="arrow" data-popper-arrow></div>
-                </div>
+                        alt="" width="16" height="16" title="胜率因人而异，仅作参考。"></h4>
 
                 <p style="text-align: center;">
                     <font color="C0C0C0" size="2">数据来源于各服前百名斗技记录，仅列出场次大于100的式神, 上次更新：08/13/2020</font>
@@ -214,7 +249,7 @@
                         <ul>
                             <br>
                             <li>
-                                网站是搭建在Github上的（使用国内服务器的话要备案，太麻烦了），CDN用的是jsDelivr和Unpkg，国内访问可能会加载缓慢甚至失败，此时可以刷新试试，之后有空的话会试试用vercel加速。熟悉html和js的小伙伴也可以去Github上clone下来，把用到的css和js下载到本地使用。
+                                网站是搭建在Github上的（使用国内服务器的话要备案，太麻烦了），国内访问可能会加载缓慢甚至失败，此时可以刷新试试，之后有空的话会试试用vercel加速。熟悉html和js的小伙伴也可以去Github上clone下来，把用到的css和js下载到本地使用。
                             </li>
                             <br>
                             <li>
@@ -277,55 +312,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.18/dist/js/i18n/defaults-zh_CN.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.17.1/dist/bootstrap-table.min.js"></script>
-    <script src="https://unpkg.com/@popperjs/core@2"></script>
-    <!-- tooltip -->
-    <script>
-        const button = document.querySelector('#info-img');
-        const tooltip = document.querySelector('#tooltip');
-
-        let popperInstance = null;
-
-        function create() {
-            popperInstance = Popper.createPopper(button, tooltip, {
-                modifiers: [
-                    {
-                        name: 'offset',
-                        options: {
-                            offset: [0, 8],
-                        },
-                    },
-                ],
-            });
-        }
-
-        function destroy() {
-            if (popperInstance) {
-                popperInstance.destroy();
-                popperInstance = null;
-            }
-        }
-
-        function show() {
-            tooltip.setAttribute('data-show', '');
-            create();
-        }
-
-        function hide() {
-            tooltip.removeAttribute('data-show');
-            destroy();
-        }
-
-        const showEvents = ['mouseenter', 'focus'];
-        const hideEvents = ['mouseleave', 'blur'];
-
-        showEvents.forEach(event => {
-            button.addEventListener(event, show);
-        });
-
-        hideEvents.forEach(event => {
-            button.addEventListener(event, hide);
-        });
-    </script>
     <!-- my js -->
     <script src="js/yysrank.js"></script>
 </body>
