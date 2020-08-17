@@ -26,6 +26,20 @@
     vertical-align: middle;
 }
 
+.modal-content {
+  width: 1200px;
+}
+@media (max-width:1200px) {
+  .modal-content {
+    width: 800px;
+  }
+}
+@media (max-width:800px) {
+  .modal-content {
+    width: 100%;
+  }
+}
+
 .progress {
     position: relative;
 }

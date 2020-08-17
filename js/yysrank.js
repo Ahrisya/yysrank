@@ -60,12 +60,33 @@ function initOptions() {
 }
 
 
+function sortingData(sortName, sortOrder, data) {
+    var order = sortOrder === 'desc' ? -1 : 1
+    data.sort(function (a, b) {
+      var aa = a[sortName]
+      var bb = b[sortName]
+      if (typeof(aa) == 'string') {
+          aa = Number(a[sortName].replace('%', ''))
+          bb = Number(b[sortName].replace('%', ''))
+      }
+      if (aa < bb) {
+        return order * -1
+      }
+      if (aa > bb) {
+        return order
+      }
+      return 0
+    })
+}
+
+
 function initTables() {
     $('#query-result').bootstrapTable({
         classes:"table table-striped table-bordered table-hover",
         theadClasses: "thead-light",
         sortable: true,
         sortOrder: 'desc',
+        customSort: sortingData,
         columns: [{
             field: 'history',
             title: '#',
@@ -127,6 +148,7 @@ function initTables() {
         theadClasses: "thead-light",
         sortable: true,
         sortOrder: 'desc',
+        customSort: sortingData,
         pagination:true,
         pageNumber:1,
         pageSize:10,
