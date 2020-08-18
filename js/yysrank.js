@@ -2,8 +2,14 @@
 var shishen_json
 var ownteam = []
 var enemyteam = []
+var ban = []
 var historynum = 0
 var queryhistory = {}
+var sp_opts = ''
+var ssr_opts = ''
+var sr_opts = ''
+var r_opts = ''
+var n_opts = ''
 
 window.onload = function () {
     initOptions()
@@ -19,44 +25,89 @@ function initOptions() {
     request.onload = function () {
         var json = JSON.parse(request.responseText)
         shishen_json = json
-        var sp = "<optgroup label=\"SP\">"
-        var ssr = "<optgroup label=\"SSR\">"
-        var sr = "<optgroup label=\"SR\">"
-        var r = "<optgroup label=\"R\">"
-        var n = "<optgroup label=\"N\">"
+        sp_opts = '<optgroup label="SP">'
+        ssr_opts = '<optgroup label="SSR">'
+        sr_opts = '<optgroup label="SR">'
+        r_opts = '<optgroup label="R">'
+        n_opts = '<optgroup label="N">'
         for (var i in json) {
             if (Number(i) < 100) {
                 continue
             }
             p = json[i]
             if (p["rarity"] == 6) {
-                sp = sp + "<option value=\"" + String(p["id"]) + "\">" + p["name"] + "</option>"
+                sp_opts = sp_opts + '<option value="' + String(p["id"]) + '" data-content=\'' + getTeamIcons([String(p["id"])]) + p["name"]  + '\'>' + '</option>'
             }
             else if (p["rarity"] == 5) {
-                ssr = ssr + "<option value=\"" + String(p["id"]) + "\">" + p["name"] + "</option>"
+                ssr_opts = ssr_opts + '<option value="' + String(p["id"]) + '" data-content=\'' + getTeamIcons([String(p["id"])]) + p["name"]  + '\'>' + '</option>'
             }
             else if (p["rarity"] == 4) {
-                sr = sr + "<option value=\"" + String(p["id"]) + "\">" + p["name"] + "</option>"
+                sr_opts = sr_opts + '<option value="' + String(p["id"]) + '" data-content=\'' + getTeamIcons([String(p["id"])]) + p["name"]  + '\'>' + '</option>'
             }
             else if (p["rarity"] == 3) {
-                r = r + "<option value=\"" + String(p["id"]) + "\">" + p["name"] + "</option>"
+                r_opts = r_opts + '<option value="' + String(p["id"]) + '" data-content=\'' + getTeamIcons([String(p["id"])]) + p["name"]  + '\'>' + '</option>'
             }
             else if (p["rarity"] == 2) {
-                n = n + "<option value=\"" + String(p["id"]) + "\">" + p["name"] + "</option>"
+                n_opts = n_opts + '<option value="' + String(p["id"]) + '" data-content=\'' + getTeamIcons([String(p["id"])]) + p["name"]  + '\'>' + '</option>'
             }
         }
-        sp = sp + "</optgroup>"
-        ssr = ssr + "</optgroup>"
-        sr = sr + "</optgroup>"
-        r = r + "</optgroup>"
-        n = n + "</optgroup>"
-        var html = sp + ssr + sr + r + n
-        var options = document.getElementById("select-own-shishen")
-        options.innerHTML = html
-        options = document.getElementById("select-enemy-shishen")
-        options.innerHTML = html
-        $('.form-control').selectpicker('refresh')
+        sp_opts = sp_opts + '</optgroup>'
+        ssr_opts = ssr_opts + '</optgroup>'
+        sr_opts = sr_opts + '</optgroup>'
+        r_opts = r_opts + '</optgroup>'
+        n_opts = n_opts + '</optgroup>'
+        var html_shishen = sp_opts + ssr_opts + sr_opts + r_opts + n_opts
+        var html_rarity = '<option value="0">全部</option><option value="6">SP</option><option value="5">SSR</option><option value="4">SR</option><option value="3">R</option><option value="2">N</option>'
+        var options = document.getElementsByClassName('selectpicker')
+        for (var i = 0; i < options.length; i++) {
+            if (options[i].name == 'select-rarity') {
+                options[i].innerHTML = html_rarity
+            }
+            else if (options[i].name == 'select-own-shishen' || options[i].name == 'select-enemy-shishen' || options[i].name == 'select-ban') {
+                options[i].innerHTML = html_shishen
+            }
+        }
+        $('.selectpicker').selectpicker('refresh')
     }
+}
+
+function changeRarity(rarity, id) {
+    var opt = document.getElementById(id)
+    switch (rarity) {
+        case "0":
+            opt.innerHTML = sp_opts + ssr_opts + sr_opts + r_opts + n_opts
+            break;
+        case "6":
+            opt.innerHTML = sp_opts
+            break;
+        case "5":
+            opt.innerHTML = ssr_opts
+            break;     
+        case "4":
+            opt.innerHTML = sr_opts
+            break;
+        case "3":
+            opt.innerHTML = r_opts
+            break;
+        case "2":
+            opt.innerHTML = n_opts
+            break;
+    }
+    $('.selectpicker').selectpicker('refresh')
+}
+  
+
+function selectShishen(btn_id) {
+    var btn = document.getElementById(btn_id)
+    btn.style.display = ""
+}
+
+function resetSSOption(btn_id, opt_id) {
+    var btn = document.getElementById(btn_id)
+    btn.style.display = "none"
+    var opt = document.getElementById(opt_id)
+    opt.value = 0
+    $('.selectpicker').selectpicker('refresh')
 }
 
 
@@ -96,6 +147,13 @@ function initTables() {
             width: 5,
             widthUnit: '%'
         },{
+            field: 'ban',
+            title: 'Ban',
+            align: 'center',
+            valign: 'middle',
+            width: 10,
+            widthUnit: '%'
+        },{
             field: 'own_team',
             title: '己方阵容',
             align: 'center',
@@ -131,7 +189,7 @@ function initTables() {
             sortable: true,
             align: 'center',
             valign: 'middle',
-            width: 20,
+            width: 10,
             widthUnit: '%'
         },{
             field: 'details',
@@ -312,59 +370,18 @@ function initShishenRank() {
 function resetTeams() {
     ownteam = []
     enemyteam = []
-    refreshTeam(true)
-    refreshTeam(false)
-}
+    ban = []
+    var options = document.getElementsByClassName('selectpicker')
+    for (var i = 0; i < options.length; i++) {
+        options[i].value = 0;
+    }
+    $('.selectpicker').selectpicker('refresh');
 
-function refreshTeam(is_own_team) {
-    var team
-    var team_display
-    if (is_own_team) {
-        team = ownteam
-        team_display = document.getElementById("own-team")
-        $('#select-own-shishen').selectpicker('deselectAll')
+    var btns = document.getElementsByClassName('minus-button')
+    for (var i = 0; i < btns.length; i++) {
+        btns[i].style.display = "none"
     }
-    else {
-        team = enemyteam
-        team_display = document.getElementById("enemy-team")
-        $('#select-enemy-shishen').selectpicker('deselectAll')
-    }
-    var html = ""
-    for (var i in team) {
-        var key = team[i]
-        var icon = shishen_json[key]["icon"]
-        var name = shishen_json[key]["name"]
-        html += "<button class=\"shishen-button\" type=\"button\"><img src=\"" + icon + "\"  alt=" + name + " width=\"50\" height=\"50\" ondblclick=\"deleteShishen(" + String(is_own_team) + ", " + key + ")\"></button>"
-    }
-    team_display.innerHTML = html
-}
 
-function addShishen(is_own_team) {
-    if (is_own_team) {
-        var value = $('#select-own-shishen').val();
-        for (var i in value) {
-            ownteam.push(value[i])
-        }
-    }
-    else {
-        var value = $('#select-enemy-shishen').val();
-        for (var i in value) {
-            enemyteam.push(value[i])
-        }
-    }
-    refreshTeam(is_own_team)
-}
-
-function deleteShishen(is_own_team, key) {
-    if (is_own_team) {
-        var index = ownteam.indexOf(String(key))
-        ownteam.splice(index, 1)
-    }
-    else {
-        var index = enemyteam.indexOf(String(key))
-        enemyteam.splice(index, 1)
-    }
-    refreshTeam(is_own_team)
 }
 
 function sortNum(a, b) {
@@ -393,6 +410,24 @@ function isContained(a, b) {
     return false
 }
 
+// check if sorted array a and b's intersection is not empty
+function hasIntersection(a, b) {
+    var i = 0
+    var j = 0
+    while (i < a.length && j < b.length) {
+        if (a[i] > b[j]) {
+            j++
+        }
+        else if (a[i] == b[j]) {
+            return true
+        }
+        else {
+            i++
+        }
+    }
+    return false
+}
+
 function toPercent(x) {
     var str = Number(x * 100).toFixed(2);
     str += "%";
@@ -401,9 +436,43 @@ function toPercent(x) {
 
 
 function queryWinRate() {
-    if (ownteam.length > 5 || enemyteam.length > 5) {
+    ownteam = []
+    enemyteam = []
+    ban = []
+
+    var own_team_ele = document.getElementsByName('select-own-shishen')
+    var enemy_team_ele = document.getElementsByName('select-enemy-shishen')
+    for (var i = 0; i < own_team_ele.length; i++) {
+        var v = own_team_ele[i].value
+        if (v != "") {
+            ownteam.push(v)
+        }
+    }
+    for (var i = 0; i < enemy_team_ele.length; i++) {
+        var v = enemy_team_ele[i].value
+        if (v != "") {
+            enemyteam.push(v)
+        }
+    }
+
+    var ban_ele = document.getElementsByName('select-ban')
+    for (var i = 0; i < ban_ele.length; i++) {
+        var v = ban_ele[i].value
+        if (v != "") {
+            ban.push(v)
+        }
+    }
+
+    var t1 = ownteam.map(Number)
+    t1 = t1.sort(sortNum)
+    var t2 = enemyteam.map(Number)
+    t2 = t2.sort(sortNum)
+    var tb = ban.map(Number)
+    tb = tb.sort(sortNum)
+
+    if (hasIntersection(tb, t1) || hasIntersection(tb, t2)) {
         toastr.options.positionClass = "toast-top-center"
-        toastr.warning("阵容式神数量超过5个！", "")
+        toastr.warning("BP冲突！", "")
     }
     else if (ownteam.length == 0) {
         toastr.options.positionClass = "toast-top-center"
@@ -413,10 +482,6 @@ function queryWinRate() {
         $('#detailed-result').modal('show')
         $('#query-progress')[0].style.display = ""
         var progress_bar = document.getElementById("query-progress-bar")
-        var t1 = ownteam.map(Number)
-        t1 = t1.sort(sortNum)
-        var t2 = enemyteam.map(Number)
-        t2 = t2.sort(sortNum)
         var n = data['n']
         var win_num = 0
         var loss_num = 0
@@ -425,6 +490,9 @@ function queryWinRate() {
 
         for (var i = 0; i < n; i++) {
             var battle = data['data'][i]
+            if (hasIntersection(tb, battle['w']) || hasIntersection(tb, battle['l'])) {
+                continue
+            }
             if (isContained(t1, battle['w']) && isContained(t2, battle['l']) && !isContained(t1, battle['l'])) {
                 win_num++
                 var key = team2Key(battle['w'], battle['l'])
@@ -456,7 +524,6 @@ function queryWinRate() {
         
         renderDetailedResult(detailed)
         addResult(win_num, loss_num)
-        resetTeams()
     }
 }
 
@@ -474,6 +541,7 @@ function getTeamIcons(t) {
 function addResult(win_num, loss_num) {
     var own_team_icons = getTeamIcons(ownteam)
     var enemy_team_icons = getTeamIcons(enemyteam)
+    var ban_icons = getTeamIcons(ban)
     var win_rate_percent = toPercent(0)
     if (win_num + loss_num > 0) {
         win_rate_percent = toPercent(win_num / (win_num + loss_num))
@@ -484,6 +552,7 @@ function addResult(win_num, loss_num) {
 
     var new_result = [{
         history: historynum,
+        ban: ban_icons,
         own_team: own_team_icons,
         enemy_team: enemy_team_icons,
         win_matches: win_num,

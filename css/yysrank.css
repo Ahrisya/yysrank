@@ -1,5 +1,11 @@
 .container {
-  max-width: 1600px;
+  max-width: 1200px;
+}
+
+.minus-button{
+  background: transparent;
+  border-width: 0px;
+  outline:none;
 }
 
 .shishen-button{

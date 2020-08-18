@@ -86,64 +86,98 @@
                 </p>
                 <p></p>
                 <h4>阵容设置</h4>
+                <p>
+                    <font color="C0C0C0" size="2">己方阵容至少需要一个式神，ban位和对方阵容可为空，ban位详情请看食用指南</font>
+                </p>
                 <div class="table-responsive">
                     <table class="table table-hover table-borderless">
                         <thead>
                             <tr>
+                                <th colspan="4" style="text-align: center;">己方阵容</th>
+                                <th></th>
+                                <th colspan="4" style="text-align: center;">对方阵容</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td style="text-align: right; vertical-align: middle;"><span style="color: red;">*
-                                    </span>己方阵容</td>
-                                <td><select class="form-control selectpicker" multiple data-live-search="true"
-                                        data-max-options="5" data-style="btn-info" id="select-own-shishen"></select>
+                                <td>Ban</td>
+                                <td><select class="form-control selectpicker" name="select-rarity" onchange="changeRarity(this.value, 'ob')"></select></td>
+                                <td><select class="form-control selectpicker" name="select-ban" data-live-search="true" title="选择式神" id="ob" onchange="selectShishen('mb1')"></select>
                                 </td>
-                                <td><button type="button" class="btn btn-success"
-                                        onclick="addShishen(true)">添加式神</button></td>
+                                <td><button type="button" class="minus-button" id="mb1" style="display: none;" onclick="resetSSOption(this.id, 'ob')"><img src="assets/img/minus3.png" style="width: 24px;"></button></td>
+                                <td></td>
+                                <td>Ban</td>
+                                <td><select class="form-control selectpicker" name="select-rarity" onchange="changeRarity(this.value, 'eb')"></select></td>
+                                <td><select class="form-control selectpicker" name="select-ban" data-live-search="true" title="选择式神" id="eb" onchange="selectShishen('mb2')"></select></td>
+                                <td><button type="button" class="minus-button" id="mb2" style="display: none;" onclick="resetSSOption(this.id, 'eb')"><img src="assets/img/minus3.png" style="width: 24px;"></button></td></td>
                             </tr>
                             <tr>
-                                <td>&nbsp;</td>
-                                <td>
-                                    <div id="own-team">
+                                <td style="width: 5%;">1</td>
+                                <td style="width: 10%;"><select class="form-control selectpicker" name="select-rarity" onchange="changeRarity(this.value, 'os1')"></select></td>
+                                <td style="width: 25%;"><select class="form-control selectpicker show-tick" name="select-own-shishen" data-live-search="true" title="选择式神" id="os1" onchange="selectShishen('mo1')"></select></td>
+                                <td style="width: 5%;"><button type="button" class="minus-button" id="mo1" style="display: none;" onclick="resetSSOption(this.id, 'os1')"><img src="assets/img/minus3.png" style="width: 24px;"></button></td>
+                                <td style="width: 10%;"></td>
+                                <td style="width: 5%;">1</td>
+                                <td style="width: 10%;"><select class="form-control selectpicker" name="select-rarity" onchange="changeRarity(this.value, 'es1')"></select></td>
+                                <td style="width: 25%;"><select class="form-control selectpicker" name="select-enemy-shishen" data-live-search="true" title="选择式神" id="es1" onchange="selectShishen('me1')"></select></td>
+                                <td style="width: 5%;"><button type="button" class="minus-button" id="me1" style="display: none;" onclick="resetSSOption(this.id, 'es1')"><img src="assets/img/minus3.png" style="width: 24px;"></button></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><select class="form-control selectpicker" name="select-rarity" onchange="changeRarity(this.value, 'os2')"></select></td>
+                                <td><select class="form-control selectpicker" name="select-own-shishen"  data-live-search="true" title="选择式神" id="os2" onchange="selectShishen('mo2')"></select></td>
+                                <td><button type="button" class="minus-button" id="mo2" style="display: none;" onclick="resetSSOption(this.id, 'os2')"><img src="assets/img/minus3.png" style="width: 24px;"></button></td>
+                                <td></td>
+                                <td>2</td>
+                                <td><select class="form-control selectpicker" name="select-rarity" onchange="changeRarity(this.value, 'es2')"></select></td>
+                                <td><select class="form-control selectpicker" name="select-enemy-shishen"  data-live-search="true" title="选择式神" id="es2" onchange="selectShishen('me2')"></select></td>
+                                <td><button type="button" class="minus-button" id="me2" style="display: none;" onclick="resetSSOption(this.id, 'es2')"><img src="assets/img/minus3.png" style="width: 24px;"></button></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><select class="form-control selectpicker" name="select-rarity" onchange="changeRarity(this.value, 'os3')"></select></td>
+                                <td><select class="form-control selectpicker" name="select-own-shishen"  data-live-search="true" title="选择式神" id="os3" onchange="selectShishen('mo3')"></select></td>
+                                <td><button type="button" class="minus-button" id="mo3" style="display: none;" onclick="resetSSOption(this.id, 'os3')"><img src="assets/img/minus3.png" style="width: 24px;"></button></td>
+                                <td></td>
+                                <td>3</td>
+                                <td><select class="form-control selectpicker" name="select-rarity" onchange="changeRarity(this.value, 'es3')"></select></td>
+                                <td><select class="form-control selectpicker" name="select-enemy-shishen"  data-live-search="true" title="选择式神" id="es3" onchange="selectShishen('me3')"></select></td>
+                                <td><button type="button" class="minus-button" id="me3" style="display: none;" onclick="resetSSOption(this.id, 'es3')"><img src="assets/img/minus3.png" style="width: 24px;"></button></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td><select class="form-control selectpicker" name="select-rarity" onchange="changeRarity(this.value, 'os4')"></select></td>
+                                <td><select class="form-control selectpicker" name="select-own-shishen"  data-live-search="true" title="选择式神" id="os4" onchange="selectShishen('mo4')"></select></td>
+                                <td><button type="button" class="minus-button" id="mo4" style="display: none;" onclick="resetSSOption(this.id, 'os4')"><img src="assets/img/minus3.png" style="width: 24px;"></button></td>
+                                <td></td>
+                                <td>4</td>
+                                <td><select class="form-control selectpicker" name="select-rarity" onchange="changeRarity(this.value, 'es4')"></select></td>
+                                <td><select class="form-control selectpicker" name="select-enemy-shishen"  data-live-search="true" title="选择式神" id="es4" onchange="selectShishen('me4')"></select></td>
+                                <td><button type="button" class="minus-button" id="me4" style="display: none;" onclick="resetSSOption(this.id, 'es4')"><img src="assets/img/minus3.png" style="width: 24px;"></button></td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td><select class="form-control selectpicker" name="select-rarity" onchange="changeRarity(this.value, 'os5')"></select></td>
+                                <td><select class="form-control selectpicker" name="select-own-shishen"  data-live-search="true" title="选择式神" id="os5" onchange="selectShishen('mo5')"></select></td>
+                                <td><button type="button" class="minus-button" id="mo5" style="display: none;" onclick="resetSSOption(this.id, 'os5')"><img src="assets/img/minus3.png" style="width: 24px;"></button></td>
+                                <td></td>
+                                <td>5</td>
+                                <td><select class="form-control selectpicker" name="select-rarity" onchange="changeRarity(this.value, 'es5')"></select></td>
+                                <td><select class="form-control selectpicker" name="select-enemy-shishen"  data-live-search="true" title="选择式神" id="es5" onchange="selectShishen('me5')"></select></td>
+                                <td><button type="button" class="minus-button" id="me5" style="display: none;" onclick="resetSSOption(this.id, 'es5')"><img src="assets/img/minus3.png" style="width: 24px;"></button></td>
+                            </tr>
+                            <tr>
+                                <td colspan="9">
+                                    <font color="C0C0C0" size="2">* 仅计算外战胜率，即己方阵容不全包含于对方阵容时的胜率。胜率因人而异，仅作参考。</font>
+                                </td>
+                            </tr>
 
-                                    </div>
-                                </td>
-                                <td></td>
-                            </tr>
                             <tr>
-                                <td style="text-align: right; vertical-align: middle;">对方阵容</td>
-                                <td><select class="form-control selectpicker" multiple data-live-search="true"
-                                        data-max-options="5" data-style="btn-info" id="select-enemy-shishen"></select>
-                                </td>
-                                <td><button type="button" class="btn btn-success"
-                                        onclick="addShishen(false)">添加式神</button></td>
-                            </tr>
-                            <tr>
-                                <td>&nbsp;</td>
-                                <td>
-                                    <div id="enemy-team">
-
-                                    </div>
-                                </td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>
-                                    <font color="C0C0C0" size="2">* 仅计算外战胜率，即己方阵容不包含于对方阵容时的胜率。胜率因人而异，仅作参考。</font>
-                                </td>
-                                <td></td>
-                            </tr>
-
-                            <tr>
-                                <td></td>
-                                <td style="text-align: center;">
+                                <td style="text-align: center;" colspan="9">
                                     <button type="button" class="btn btn-primary" onclick="queryWinRate()">查询胜率</button>
                                     &nbsp;&nbsp;
                                     <button type="button" class="btn btn-secondary" onclick="resetTeams()">重置</button>
                                 </td>
-                                <td></td>
                             </tr>
                         </tbody>
                     </table>
@@ -220,25 +254,24 @@
                             </li>
                             <br>
                             <li>
-                                设置己方阵容：选好式神后（式神一次可多选）点击添加式神，即可把选中的式神加入己方阵容。阵容中有重复式神的话可以通过多次添加完成设置。
+                                <strong>因网易大神的记录中没有ban位数据，所以这里的ban位只是过滤掉含ban位的阵容，不代表真实的bp情况。</strong>
                             </li>
                             <br>
                             <li>
-                                可以通过双击式神头像从己方阵容中删除式神。
+                                选择式神，己方式神至少要有一个，ban和对方式神可以为空
                             </li>
                             <br>
                             <li>
-                                对方阵容通过同样的方法设置，也可以忽略不填，此时会计算己方阵容在所有情况下的外战胜率。
+                                点击式神右侧的减号可以删除式神
                             </li>
                             <br>
                             <li>
-                                稍等几秒会显示结果弹窗，可以通过点击表头的箭头进行排序。PS：一般1s以内就可以出结果，等待时间过长的话可能是资源加载失败，建议刷新网页。
+                                点击查询胜率，稍等几秒会显示结果弹窗，可以通过点击表头的箭头进行排序。PS：一般1s以内就可以出结果，等待时间过长的话可能是资源加载失败，建议刷新网页。
                             </li>
                             <br>
                             <li>
                                 每次计算的结果都会保留下来，可以通过点击查询历史的“更多”显示。
                             </li>
-                            <br>
                         </ul>
                     </div>
                     <div class="hr-line-solid"></div>
@@ -259,7 +292,6 @@
                             <li>
                                 手机屏的话可能会因为过小导致表格显示不全，建议手机看的话浏览器开启桌面版模式（e.g. 手机Chrome的话：设置->桌面版网站，打上勾就可以了）。
                             </li>
-                            <br>
                         </ul>
                     </div>
                     <div class="hr-line-solid"></div>
@@ -272,7 +304,6 @@
                             <li>
                                 阵容推荐，预计8月底完成。
                             </li>
-                            <br>
                         </ul>
                     </div>
                     <div class="hr-line-solid"></div>
@@ -304,6 +335,18 @@
                             <br>
                             <li>
                                 QQ: 1282519861 (发QQ邮箱也可，但可能回复会比较慢)
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="hr-line-solid"></div>
+                    <div class="row">
+                        <h4>Updates</h4>
+                    </div>
+                    <div class="row">
+                        <ul>
+                            <br>
+                            <li>
+                                08/18/2020：优化了交互和UI，增加ban位
                             </li>
                         </ul>
                     </div>
