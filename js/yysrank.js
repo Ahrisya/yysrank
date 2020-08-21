@@ -11,11 +11,40 @@ var sr_opts = ''
 var r_opts = ''
 var n_opts = ''
 
+var last_update_date = '0821'
+
 window.onload = function () {
     initOptions()
     initTables()
     initShishenRank()
+    showUpdates()
 }
+
+function setCookie(cname,cvalue,exdays){
+	var d = new Date();
+	d.setTime(d.getTime()+(exdays*24*60*60*1000));
+	var expires = "expires="+d.toGMTString();
+	document.cookie = cname+"="+cvalue+"; "+expires;
+}
+
+function getCookie(cname){
+	var name = cname + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0; i<ca.length; i++) {
+		var c = ca[i].trim();
+		if (c.indexOf(name)==0) { return c.substring(name.length,c.length); }
+	}
+	return "";
+}
+
+function showUpdates () {
+    if (getCookie("lastupdate") != last_update_date){
+        $('#new_updates').modal('show')
+        setCookie("lastupdate", last_update_date, 1000)
+    } 
+        
+}
+
 
 function initOptions() {
     var url = "json/shishen.json"
@@ -36,19 +65,15 @@ function initOptions() {
             }
             p = json[i]
             if (p["rarity"] == 6) {
-                sp_opts = sp_opts + '<option value="' + String(p["id"]) + '" data-content=\'' + getTeamIcons([String(p["id"])]) + p["name"]  + '\'>' + '</option>'
-            }
-            else if (p["rarity"] == 5) {
-                ssr_opts = ssr_opts + '<option value="' + String(p["id"]) + '" data-content=\'' + getTeamIcons([String(p["id"])]) + p["name"]  + '\'>' + '</option>'
-            }
-            else if (p["rarity"] == 4) {
-                sr_opts = sr_opts + '<option value="' + String(p["id"]) + '" data-content=\'' + getTeamIcons([String(p["id"])]) + p["name"]  + '\'>' + '</option>'
-            }
-            else if (p["rarity"] == 3) {
-                r_opts = r_opts + '<option value="' + String(p["id"]) + '" data-content=\'' + getTeamIcons([String(p["id"])]) + p["name"]  + '\'>' + '</option>'
-            }
-            else if (p["rarity"] == 2) {
-                n_opts = n_opts + '<option value="' + String(p["id"]) + '" data-content=\'' + getTeamIcons([String(p["id"])]) + p["name"]  + '\'>' + '</option>'
+                sp_opts = sp_opts + '<option value="' + String(p["id"]) + '" data-content=\'' + getTeamIcons([String(p["id"])]) + p["name"] + '\'>' + '</option>'
+            } else if (p["rarity"] == 5) {
+                ssr_opts = ssr_opts + '<option value="' + String(p["id"]) + '" data-content=\'' + getTeamIcons([String(p["id"])]) + p["name"] + '\'>' + '</option>'
+            } else if (p["rarity"] == 4) {
+                sr_opts = sr_opts + '<option value="' + String(p["id"]) + '" data-content=\'' + getTeamIcons([String(p["id"])]) + p["name"] + '\'>' + '</option>'
+            } else if (p["rarity"] == 3) {
+                r_opts = r_opts + '<option value="' + String(p["id"]) + '" data-content=\'' + getTeamIcons([String(p["id"])]) + p["name"] + '\'>' + '</option>'
+            } else if (p["rarity"] == 2) {
+                n_opts = n_opts + '<option value="' + String(p["id"]) + '" data-content=\'' + getTeamIcons([String(p["id"])]) + p["name"] + '\'>' + '</option>'
             }
         }
         sp_opts = sp_opts + '</optgroup>'
@@ -62,8 +87,7 @@ function initOptions() {
         for (var i = 0; i < options.length; i++) {
             if (options[i].name == 'select-rarity') {
                 options[i].innerHTML = html_rarity
-            }
-            else if (options[i].name == 'select-own-shishen' || options[i].name == 'select-enemy-shishen' || options[i].name == 'select-ban') {
+            } else if (options[i].name == 'select-own-shishen' || options[i].name == 'select-enemy-shishen' || options[i].name == 'select-ban') {
                 options[i].innerHTML = html_shishen
             }
         }
@@ -82,7 +106,7 @@ function changeRarity(rarity, id) {
             break;
         case "5":
             opt.innerHTML = ssr_opts
-            break;     
+            break;
         case "4":
             opt.innerHTML = sr_opts
             break;
@@ -95,7 +119,7 @@ function changeRarity(rarity, id) {
     }
     $('.selectpicker').selectpicker('refresh')
 }
-  
+
 
 function selectShishen(btn_id) {
     var btn = document.getElementById(btn_id)
@@ -114,26 +138,26 @@ function resetSSOption(btn_id, opt_id) {
 function sortingData(sortName, sortOrder, data) {
     var order = sortOrder === 'desc' ? -1 : 1
     data.sort(function (a, b) {
-      var aa = a[sortName]
-      var bb = b[sortName]
-      if (typeof(aa) == 'string') {
-          aa = Number(a[sortName].replace('%', ''))
-          bb = Number(b[sortName].replace('%', ''))
-      }
-      if (aa < bb) {
-        return order * -1
-      }
-      if (aa > bb) {
-        return order
-      }
-      return 0
+        var aa = a[sortName]
+        var bb = b[sortName]
+        if (typeof (aa) == 'string') {
+            aa = Number(a[sortName].replace('%', ''))
+            bb = Number(b[sortName].replace('%', ''))
+        }
+        if (aa < bb) {
+            return order * -1
+        }
+        if (aa > bb) {
+            return order
+        }
+        return 0
     })
 }
 
 
 function initTables() {
     $('#query-result').bootstrapTable({
-        classes:"table table-striped table-bordered table-hover",
+        classes: "table table-striped table-bordered table-hover",
         theadClasses: "thead-light",
         sortable: true,
         sortOrder: 'desc',
@@ -146,28 +170,28 @@ function initTables() {
             valign: 'middle',
             width: 5,
             widthUnit: '%'
-        },{
+        }, {
             field: 'ban',
             title: 'Ban',
             align: 'center',
             valign: 'middle',
             width: 10,
             widthUnit: '%'
-        },{
+        }, {
             field: 'own_team',
             title: '己方阵容',
             align: 'center',
             valign: 'middle',
             width: 25,
             widthUnit: '%'
-        },{
+        }, {
             field: 'enemy_team',
             title: '对方阵容',
             align: 'center',
             valign: 'middle',
             width: 25,
             widthUnit: '%'
-        },{
+        }, {
             field: 'win_matches',
             title: '获胜场次',
             sortable: true,
@@ -175,7 +199,7 @@ function initTables() {
             valign: 'middle',
             width: 10,
             widthUnit: '%'
-        },{
+        }, {
             field: 'total_matches',
             title: '总场次',
             sortable: true,
@@ -183,7 +207,7 @@ function initTables() {
             valign: 'middle',
             width: 10,
             widthUnit: '%'
-        },{
+        }, {
             field: 'win_rate',
             title: '胜率',
             sortable: true,
@@ -191,7 +215,7 @@ function initTables() {
             valign: 'middle',
             width: 10,
             widthUnit: '%'
-        },{
+        }, {
             field: 'details',
             title: '更多',
             align: 'center',
@@ -199,21 +223,20 @@ function initTables() {
             width: 5,
             widthUnit: '%'
         }]
-    }
-    )
+    })
     $('#detailed-query-result').bootstrapTable({
-        classes:"table table-striped table-bordered table-hover",
+        classes: "table table-striped table-bordered table-hover",
         theadClasses: "thead-light",
         sortable: true,
         sortOrder: 'desc',
         customSort: sortingData,
-        pagination:true,
-        pageNumber:1,
-        pageSize:10,
-        pageList:"[10, 20, 50, 200]",
-        paginationHAlign:"left",
-        paginationDetailHAlign:"right",
-        
+        pagination: true,
+        pageNumber: 1,
+        pageSize: 10,
+        pageList: "[10, 20, 50, 200]",
+        paginationHAlign: "left",
+        paginationDetailHAlign: "right",
+
         columns: [{
             field: 'own_team',
             title: '己方阵容',
@@ -221,14 +244,14 @@ function initTables() {
             valign: 'middle',
             width: 25,
             widthUnit: '%'
-        },{
+        }, {
             field: 'enemy_team',
             title: '对方阵容',
             align: 'center',
             valign: 'middle',
             width: 25,
             widthUnit: '%'
-        },{
+        }, {
             field: 'win_matches',
             title: '获胜场次',
             sortable: true,
@@ -236,7 +259,7 @@ function initTables() {
             valign: 'middle',
             width: 15,
             widthUnit: '%'
-        },{
+        }, {
             field: 'total_matches',
             title: '总场次',
             sortable: true,
@@ -244,7 +267,7 @@ function initTables() {
             valign: 'middle',
             width: 15,
             widthUnit: '%'
-        },{
+        }, {
             field: 'win_rate',
             title: '胜率',
             sortable: true,
@@ -253,20 +276,19 @@ function initTables() {
             width: 20,
             widthUnit: '%'
         }]
-    }
-    )
+    })
 
     $('#shishen-rank-table').bootstrapTable({
-        classes:"table table-striped table-hover",
+        classes: "table table-striped table-hover",
         theadClasses: "thead-light",
         sortable: true,
         sortOrder: 'desc',
-        pagination:true,
-        pageNumber:1,
-        pageSize:20,
-        pageList:"[20, 50, 100, 200]",
-        paginationHAlign:"left",
-        paginationDetailHAlign:"right",
+        pagination: true,
+        pageNumber: 1,
+        pageSize: 20,
+        pageList: "[20, 50, 100, 200]",
+        paginationHAlign: "left",
+        paginationDetailHAlign: "right",
         columns: [{
             field: 'rank',
             title: '#',
@@ -274,35 +296,35 @@ function initTables() {
             valign: 'middle',
             width: 5,
             widthUnit: '%'
-        },{
+        }, {
             field: 'rank_change',
             title: '',
             align: 'center',
             valign: 'middle',
             width: 5,
             widthUnit: '%'
-        },{
+        }, {
             field: 'shishen',
             title: '式神',
             align: 'center',
             valign: 'middle',
             width: 20,
             widthUnit: '%'
-        },{
+        }, {
             field: 'win_rate',
             title: '外战胜率',
             align: 'center',
             valign: 'middle',
             width: 30,
             widthUnit: '%'
-        },{
+        }, {
             field: 'pick_rate',
             title: '选用率',
             align: 'center',
             valign: 'middle',
             width: 30,
             widthUnit: '%'
-        },{
+        }, {
             field: 'total_matches',
             title: '外战次数',
             align: 'center',
@@ -310,12 +332,11 @@ function initTables() {
             width: 10,
             widthUnit: '%'
         }]
-    }
-    )
+    })
 }
 
 function createProgBar(v, maxv) {
-    var w = toPercent(v/maxv)
+    var w = toPercent(v / maxv)
     var html = '<div class="progress" style="height: 25px;" placeholder="test"><div class="progress-bar" style="width: ' + w + ';background-color:#0489B1" role="progressbar" aria-valuenow="' + v + '" aria-valuemin="0" aria-valuemax="100"></div><p style="left:' + w + '">' + toPercent(v) + '</p></div>'
     return html
 }
@@ -324,14 +345,11 @@ function getRankChange(c) {
     var html
     if (c == 'new') {
         html = '<font color="blue">new</font>'
-    }
-    else if (c > 0) {
+    } else if (c > 0) {
         html = '<img src="./assets/img/icon-championtier-up.png" alt=""><font color="green">' + String(c) + '</font>'
-    }
-    else if (c < 0) {
+    } else if (c < 0) {
         html = '<img src="./assets/img/icon-championtier-down.png" alt=""><font color="red">' + String(-c) + '</font>'
-    }
-    else {
+    } else {
         html = '<img src="./assets/img/icon-championtier-stay.png" alt=""><font color="gray">' + String(c) + '</font>'
     }
     return html
@@ -348,7 +366,7 @@ function initShishenRank() {
         for (key in json) {
             var shishen_html = getTeamIcons([json[key][2]])
             shishen_html = shishen_html + shishen_json[json[key][2]]['name']
-            var win_rate_html = createProgBar(json[key][3]/100, 1)
+            var win_rate_html = createProgBar(json[key][3] / 100, 1)
             var pick_rate_html = createProgBar(json[key][4], 1)
             var rank_change = getRankChange(json[key][1])
             var row = {
@@ -395,12 +413,10 @@ function isContained(a, b) {
     while (i < a.length && j < b.length) {
         if (a[i] > b[j]) {
             j++
-        }
-        else if (a[i] == b[j]) {
+        } else if (a[i] == b[j]) {
             i++
             j++
-        }
-        else {
+        } else {
             return false
         }
     }
@@ -417,11 +433,9 @@ function hasIntersection(a, b) {
     while (i < a.length && j < b.length) {
         if (a[i] > b[j]) {
             j++
-        }
-        else if (a[i] == b[j]) {
+        } else if (a[i] == b[j]) {
             return true
-        }
-        else {
+        } else {
             i++
         }
     }
@@ -473,12 +487,10 @@ function queryWinRate() {
     if (hasIntersection(tb, t1) || hasIntersection(tb, t2)) {
         toastr.options.positionClass = "toast-top-center"
         toastr.warning("BP冲突！", "")
-    }
-    else if (ownteam.length == 0) {
+    } else if (ownteam.length == 0) {
         toastr.options.positionClass = "toast-top-center"
         toastr.warning("请设置己方阵容！", "")
-    }
-    else {
+    } else {
         $('#detailed-result').modal('show')
         $('#query-progress')[0].style.display = ""
         var progress_bar = document.getElementById("query-progress-bar")
@@ -487,41 +499,82 @@ function queryWinRate() {
         var loss_num = 0
 
         detailed = {}
+        // When t1 is containted in t2
+        if (isContained(t1, t2)) {
+            for (var i = 0; i < n; i++) {
+                var battle = data['data'][i]
+                if (hasIntersection(tb, battle['w']) || hasIntersection(tb, battle['l']) || (battle['w'] == battle['l'])) {
+                    continue
+                }
+                if (isContained(t1, battle['w']) && isContained(t2, battle['l'])) {
+                    win_num++
+                    var key = team2Key(battle['w'], battle['l'])
+                    if (detailed.hasOwnProperty(key)) {
+                        detailed[key]['w']++
+                    } else {
+                        detailed[key] = {
+                            'w': 1,
+                            'l': 0
+                        }
+                    }
 
-        for (var i = 0; i < n; i++) {
-            var battle = data['data'][i]
-            if (hasIntersection(tb, battle['w']) || hasIntersection(tb, battle['l'])) {
-                continue
-            }
-            if (isContained(t1, battle['w']) && isContained(t2, battle['l']) && !isContained(t1, battle['l'])) {
-                win_num++
-                var key = team2Key(battle['w'], battle['l'])
-                if (detailed.hasOwnProperty(key)) {
-                    detailed[key]['w']++
                 }
-                else {
-                    detailed[key] = {'w': 1, 'l': 0}
+                if (isContained(t1, battle['l']) && isContained(t2, battle['w'])) {
+                    loss_num++
+                    var key = team2Key(battle['l'], battle['w'])
+                    if (detailed.hasOwnProperty(key)) {
+                        detailed[key]['l']++
+                    } else {
+                        detailed[key] = {
+                            'w': 0,
+                            'l': 1
+                        }
+                    }
                 }
-                
-            }
-            else if (isContained(t1, battle['l']) && isContained(t2, battle['w']) && !isContained(t1, battle['w'])) {
-                loss_num++
-                var key = team2Key(battle['l'], battle['w'])
-                if (detailed.hasOwnProperty(key)) {
-                    detailed[key]['l']++
-                }
-                else {
-                    detailed[key] = {'w': 0, 'l': 1}
+                if (i % 1000 == 0) {
+                    progress_bar.style.width = toPercent(i / n)
+                    progress_bar.innerText = toPercent(i / n)
                 }
             }
-            if (i % 1000 == 0) {
-                progress_bar.style.width = toPercent(i / n)
-                progress_bar.innerText = toPercent(i / n)
+        } else {
+            for (var i = 0; i < n; i++) {
+                var battle = data['data'][i]
+                if (hasIntersection(tb, battle['w']) || hasIntersection(tb, battle['l'])) {
+                    continue
+                }
+                if (isContained(t1, battle['w']) && isContained(t2, battle['l']) && !isContained(t1, battle['l'])) {
+                    win_num++
+                    var key = team2Key(battle['w'], battle['l'])
+                    if (detailed.hasOwnProperty(key)) {
+                        detailed[key]['w']++
+                    } else {
+                        detailed[key] = {
+                            'w': 1,
+                            'l': 0
+                        }
+                    }
+
+                } else if (isContained(t1, battle['l']) && isContained(t2, battle['w']) && !isContained(t1, battle['w'])) {
+                    loss_num++
+                    var key = team2Key(battle['l'], battle['w'])
+                    if (detailed.hasOwnProperty(key)) {
+                        detailed[key]['l']++
+                    } else {
+                        detailed[key] = {
+                            'w': 0,
+                            'l': 1
+                        }
+                    }
+                }
+                if (i % 1000 == 0) {
+                    progress_bar.style.width = toPercent(i / n)
+                    progress_bar.innerText = toPercent(i / n)
+                }
             }
         }
         progress_bar.style.width = "100%"
         progress_bar.innerText = "Done! Rendering……"
-        
+
         renderDetailedResult(detailed)
         addResult(win_num, loss_num)
     }
@@ -547,8 +600,8 @@ function addResult(win_num, loss_num) {
         win_rate_percent = toPercent(win_num / (win_num + loss_num))
     }
     historynum++
-    
-    var more_detail =  '<button class="detail-button" type="button" onclick="showHistoryDetail(' + String(historynum) +')">' + '<img src="assets/img/three-dots.svg" alt="" width="16" height="16" title="详细胜率"></img></button>'
+
+    var more_detail = '<button class="detail-button" type="button" onclick="showHistoryDetail(' + String(historynum) + ')">' + '<img src="assets/img/three-dots.svg" alt="" width="16" height="16" title="详细胜率"></img></button>'
 
     var new_result = [{
         history: historynum,
@@ -569,13 +622,45 @@ function team2Key(t1, t2) {
 
 function key2Team(key) {
     var key_split = key.split('.')
-    var t1_str, t2_str
     t1 = key_split[0].split(',')
     t2 = key_split[1].split(',')
     return {
-        'ownteam':t1,
-        'enemyteam':t2
+        'ownteam': t1,
+        'enemyteam': t2
     }
+}
+
+function beautifyOutput(t1, t2) {
+    var beautify_result = []
+    for (var i = 0; i < t2.length; i++) {
+        beautify_result.push(t2[i])
+    }
+    var checked_idx1 = []
+    var checked_idx2 = []
+    for (var i = 0; i < t1.length; i++) {
+        for (var j = 0; j < t2.length; j++) {
+            if ($.inArray(j, checked_idx2) >= 0) {
+                continue
+            }
+            if (t1[i] == t2[j]) {
+                checked_idx1.push(i)
+                checked_idx2.push(j)
+                break
+            }
+        }
+        if (checked_idx2.length == t2.length) {
+            break
+        }
+    }
+    for (var i = 0; i < t1.length; i++) {
+        if ($.inArray(i, checked_idx1) < 0) {
+            beautify_result.push(t1[i])
+        }
+    }
+    if (beautify_result.length != 5) {
+        alert('something is wrong when beautifying outputs')
+    }
+    return beautify_result
 }
 
 function renderDetailedResult(detailed_data) {
@@ -583,12 +668,12 @@ function renderDetailedResult(detailed_data) {
     var detailed_result = []
     for (key in detailed_data) {
         var team = key2Team(key)
-        own_team_icons = getTeamIcons(team['ownteam'])
-        enemy_team_icons = getTeamIcons(team['enemyteam'])
+        own_team_icons = getTeamIcons(beautifyOutput(team['ownteam'], ownteam))
+        enemy_team_icons = getTeamIcons(beautifyOutput(team['enemyteam'], enemyteam))
         win_num = detailed_data[key]['w']
         total_num = win_num + detailed_data[key]['l']
         win_rate_percent = toPercent(win_num / total_num)
-        
+
         var row = {
             own_team: own_team_icons,
             enemy_team: enemy_team_icons,
@@ -606,5 +691,5 @@ function renderDetailedResult(detailed_data) {
 function showHistoryDetail(n) {
     $('#detailed-query-result').bootstrapTable('removeAll')
     $('#detailed-result').modal('show')
-    $('#detailed-query-result').bootstrapTable('load', JSON.parse(queryhistory[String(n-1)]))
+    $('#detailed-query-result').bootstrapTable('load', JSON.parse(queryhistory[String(n - 1)]))
 }
