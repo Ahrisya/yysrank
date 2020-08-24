@@ -11,7 +11,7 @@ var sr_opts = ''
 var r_opts = ''
 var n_opts = ''
 
-var last_update_date = '0821'
+var last_update_date = '0824'
 
 window.onload = function () {
     initOptions()
