@@ -28,9 +28,9 @@ const config = {
         ]
     },
     plugins: [
-        // new CopyPlugin({
-        //     patterns: [{from: 'src/index.html'}],
-        // }),
+        new CopyPlugin({
+            patterns: [{from: 'static/'}],
+        }),
         new HtmlWebpackPlugin({
             template: 'src/index.html',
             inject: true
