@@ -4,6 +4,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const WebpackCdnPlugin = require('webpack-cdn-plugin');
 
 const config = {
     entry: './src/index.js',
@@ -34,6 +35,34 @@ const config = {
         new HtmlWebpackPlugin({
             template: 'src/index.html',
             inject: true
+        }),
+        new WebpackCdnPlugin({
+            prodUrl: 'https://cdn.jsdelivr.net/npm/:name@:version/:path',
+            modules: [
+                {
+                    name: "jquery",
+                    path: 'dist/jquery.min.js'
+                }, {
+                    name: "bootstrap",
+                    path: 'dist/js/bootstrap.min.js',
+                    style: 'dist/css/bootstrap.min.css'
+                }, {
+                    name: "bootstrap-select",
+                    paths: [
+                        'dist/js/bootstrap-select.min.js',
+                        'dist/js/i18n/defaults-zh_CN.js',
+                    ],
+                    style: 'dist/css/bootstrap-select.min.css'
+                }, {
+                    name: "bootstrap-table",
+                    path: "dist/bootstrap-table.min.js",
+                    style: "dist/bootstrap-table.min.css"
+                }, {
+                    name: "toastr",
+                    path: "build/toastr.min.js",
+                    style: "build/toastr.min.css"
+                }
+            ]
         }),
         new MiniCssExtractPlugin(),
         new CleanWebpackPlugin()

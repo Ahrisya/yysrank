@@ -31,12 +31,16 @@
     "mini-css-extract-plugin": "^0.11.0",
     "style-loader": "^1.2.1",
     "webpack": "^4.44.1",
+    "webpack-cdn-plugin": "^3.3.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
     "bootstrap": "^4.5.2",
+    "bootstrap-select": "^1.13.18",
+    "bootstrap-table": "^1.17.1",
     "jquery": "^3.5.1",
-    "popper.js": "^1.16.1"
+    "popper.js": "^1.16.1",
+    "toastr": "^2.1.4"
   }
 }
