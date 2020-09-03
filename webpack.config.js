@@ -37,20 +37,23 @@ const config = {
             inject: true
         }),
         new WebpackCdnPlugin({
-            prodUrl: 'https://cdn.jsdelivr.net/npm/:name@:version/:path',
+            prodUrl: '//cdn.jsdelivr.net/npm/:name@:version/:path',
             modules: [
                 {
                     name: "jquery",
                     path: 'dist/jquery.min.js'
                 }, {
                     name: "bootstrap",
-                    path: 'dist/js/bootstrap.min.js',
+                    paths: [
+                        'dist/js/bootstrap.bundle.min.js',
+                        'dist/js/bootstrap.min.js',
+                    ],
                     style: 'dist/css/bootstrap.min.css'
                 }, {
                     name: "bootstrap-select",
                     paths: [
                         'dist/js/bootstrap-select.min.js',
-                        'dist/js/i18n/defaults-zh_CN.js',
+                        'dist/js/i18n/defaults-zh_CN.min.js',
                     ],
                     style: 'dist/css/bootstrap-select.min.css'
                 }, {

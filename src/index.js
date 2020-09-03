@@ -1,9 +1,6 @@
-import "./yysrank";
-import "jquery"
-import "bootstrap"
-import "bootstrap-select"
-import "bootstrap-table"
-import "toastr"
-import "./index.css"
+import "./yysrank"
+import "./yysrank.css"
 
-console.log("hello");
+jQuery(document).ready(function () {
+    console.log("init");
+});
