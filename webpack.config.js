@@ -10,14 +10,27 @@ const config = {
     entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js'
     },
     module: {
         rules: [
             {
+                // 遗留的js代码不过审，当作文件处理
+                test: /legacy\/.*\.js$/,
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]',
+                    }
+                }],
+            },
+            {
                 test: /\.js$/,
                 use: 'babel-loader',
-                exclude: /node_modules/
+                exclude: /(node_modules|legacy)/
+            },
+            {
+                test: /\.(htm|html)$/i,
+                use: 'html-loader'
             },
             {
                 test: /\.css$/,
@@ -25,17 +38,33 @@ const config = {
                     MiniCssExtractPlugin.loader,
                     'css-loader'
                 ]
-            }
+            },
+            {
+                test: /\.(png|jpg|gif|svg)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            // outputPath: 'images',
+                            // 将图片生成至原来的目录
+                            outputPath: 'assets/img',
+                            name: '[name].[ext]',
+                        }
+                    }
+                ]
+            },
         ]
     },
     plugins: [
+        // 复制遗留的文件到发布目录中，全部修改完该插件会取消
         new CopyPlugin({
             patterns: [{from: 'static/'}],
         }),
         new HtmlWebpackPlugin({
-            template: 'src/index.html',
-            inject: true
+            template: path.resolve(__dirname, 'src/index.html'),
+            inject: 'head', // 不能使用默认值，因为遗留的js会因此而报错
         }),
+        // CDN的配置，这里的库会默认注入到网页中
         new WebpackCdnPlugin({
             prodUrl: '//cdn.jsdelivr.net/npm/:name@:version/:path',
             modules: [
