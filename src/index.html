@@ -7,14 +7,6 @@
     <title>阴阳师斗技阵容胜率查询</title>
     <meta name="keywords" content="阴阳师,斗技,阵容胜率,式神胜率,阵容推荐">
     <meta name="description" content="查询阴阳师斗技阵容和式神胜率、选用率等每周最新数据。">
-    <!-- 3rd party css -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css">
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.18/dist/css/bootstrap-select.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-table@1.17.1/dist/bootstrap-table.min.css">
-    <!-- my css -->
-    <link rel="stylesheet" href="css/yysrank.css">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128562086-3"></script>
     <script>
@@ -55,14 +47,14 @@
         </div>
         <div id="layout"
             style="position: absolute;top: 40%; left: 40%;width: 20%; height: 20%;  z-index: 1001;text-align:center;">
-            <img src="assets/img/loading.gif" /></div>
+            <img src="../static/assets/img/loading.gif" /></div>
     </div>
 
     <div class="modal fade" id="new_updates" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="detailed-result-label">Updates</h5>
+                    <h5 class="modal-title" id="detailed-result-label-1">Updates</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -135,7 +127,7 @@
                                         title="选择式神" id="ob" onchange="selectShishen('mb1')"></select>
                                 </td>
                                 <td><button type="button" class="minus-button" id="mb1" style="display: none;"
-                                        onclick="resetSSOption(this.id, 'ob')"><img src="assets/img/minus3.png"
+                                        onclick="resetSSOption(this.id, 'ob')"><img src="../static/assets/img/minus3.png"
                                             style="width: 24px;"></button></td>
                                 <td></td>
                                 <td>Ban</td>
@@ -144,7 +136,7 @@
                                 <td><select class="form-control selectpicker" name="select-ban" data-live-search="true"
                                         title="选择式神" id="eb" onchange="selectShishen('mb2')"></select></td>
                                 <td><button type="button" class="minus-button" id="mb2" style="display: none;"
-                                        onclick="resetSSOption(this.id, 'eb')"><img src="assets/img/minus3.png"
+                                        onclick="resetSSOption(this.id, 'eb')"><img src="../static/assets/img/minus3.png"
                                             style="width: 24px;"></button></td>
                                 </td>
                             </tr>
@@ -157,7 +149,7 @@
                                         onchange="selectShishen('mo1')"></select></td>
                                 <td style="width: 5%;"><button type="button" class="minus-button" id="mo1"
                                         style="display: none;" onclick="resetSSOption(this.id, 'os1')"><img
-                                            src="assets/img/minus3.png" style="width: 24px;"></button></td>
+                                        src="../static/assets/img/minus3.png" style="width: 24px;"></button></td>
                                 <td style="width: 10%;"></td>
                                 <td style="width: 5%;">1</td>
                                 <td style="width: 10%;"><select class="form-control selectpicker" name="select-rarity"
@@ -167,7 +159,7 @@
                                         onchange="selectShishen('me1')"></select></td>
                                 <td style="width: 5%;"><button type="button" class="minus-button" id="me1"
                                         style="display: none;" onclick="resetSSOption(this.id, 'es1')"><img
-                                            src="assets/img/minus3.png" style="width: 24px;"></button></td>
+                                        src="../static/assets/img/minus3.png" style="width: 24px;"></button></td>
                             </tr>
                             <tr>
                                 <td>2</td>
@@ -177,7 +169,7 @@
                                         data-live-search="true" title="选择式神" id="os2"
                                         onchange="selectShishen('mo2')"></select></td>
                                 <td><button type="button" class="minus-button" id="mo2" style="display: none;"
-                                        onclick="resetSSOption(this.id, 'os2')"><img src="assets/img/minus3.png"
+                                        onclick="resetSSOption(this.id, 'os2')"><img src="../static/assets/img/minus3.png"
                                             style="width: 24px;"></button></td>
                                 <td></td>
                                 <td>2</td>
@@ -187,7 +179,7 @@
                                         data-live-search="true" title="选择式神" id="es2"
                                         onchange="selectShishen('me2')"></select></td>
                                 <td><button type="button" class="minus-button" id="me2" style="display: none;"
-                                        onclick="resetSSOption(this.id, 'es2')"><img src="assets/img/minus3.png"
+                                        onclick="resetSSOption(this.id, 'es2')"><img src="../static/assets/img/minus3.png"
                                             style="width: 24px;"></button></td>
                             </tr>
                             <tr>
@@ -198,7 +190,7 @@
                                         data-live-search="true" title="选择式神" id="os3"
                                         onchange="selectShishen('mo3')"></select></td>
                                 <td><button type="button" class="minus-button" id="mo3" style="display: none;"
-                                        onclick="resetSSOption(this.id, 'os3')"><img src="assets/img/minus3.png"
+                                        onclick="resetSSOption(this.id, 'os3')"><img src="../static/assets/img/minus3.png"
                                             style="width: 24px;"></button></td>
                                 <td></td>
                                 <td>3</td>
@@ -208,7 +200,7 @@
                                         data-live-search="true" title="选择式神" id="es3"
                                         onchange="selectShishen('me3')"></select></td>
                                 <td><button type="button" class="minus-button" id="me3" style="display: none;"
-                                        onclick="resetSSOption(this.id, 'es3')"><img src="assets/img/minus3.png"
+                                        onclick="resetSSOption(this.id, 'es3')"><img src="../static/assets/img/minus3.png"
                                             style="width: 24px;"></button></td>
                             </tr>
                             <tr>
@@ -219,7 +211,7 @@
                                         data-live-search="true" title="选择式神" id="os4"
                                         onchange="selectShishen('mo4')"></select></td>
                                 <td><button type="button" class="minus-button" id="mo4" style="display: none;"
-                                        onclick="resetSSOption(this.id, 'os4')"><img src="assets/img/minus3.png"
+                                        onclick="resetSSOption(this.id, 'os4')"><img src="../static/assets/img/minus3.png"
                                             style="width: 24px;"></button></td>
                                 <td></td>
                                 <td>4</td>
@@ -229,7 +221,7 @@
                                         data-live-search="true" title="选择式神" id="es4"
                                         onchange="selectShishen('me4')"></select></td>
                                 <td><button type="button" class="minus-button" id="me4" style="display: none;"
-                                        onclick="resetSSOption(this.id, 'es4')"><img src="assets/img/minus3.png"
+                                        onclick="resetSSOption(this.id, 'es4')"><img src="../static/assets/img/minus3.png"
                                             style="width: 24px;"></button></td>
                             </tr>
                             <tr>
@@ -240,7 +232,7 @@
                                         data-live-search="true" title="选择式神" id="os5"
                                         onchange="selectShishen('mo5')"></select></td>
                                 <td><button type="button" class="minus-button" id="mo5" style="display: none;"
-                                        onclick="resetSSOption(this.id, 'os5')"><img src="assets/img/minus3.png"
+                                        onclick="resetSSOption(this.id, 'os5')"><img src="../static/assets/img/minus3.png"
                                             style="width: 24px;"></button></td>
                                 <td></td>
                                 <td>5</td>
@@ -250,7 +242,7 @@
                                         data-live-search="true" title="选择式神" id="es5"
                                         onchange="selectShishen('me5')"></select></td>
                                 <td><button type="button" class="minus-button" id="me5" style="display: none;"
-                                        onclick="resetSSOption(this.id, 'es5')"><img src="assets/img/minus3.png"
+                                        onclick="resetSSOption(this.id, 'es5')"><img src="../static/assets/img/minus3.png"
                                             style="width: 24px;"></button></td>
                             </tr>
                             <tr>
@@ -286,7 +278,7 @@
                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="display: table;">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="detailed-result-label">查询结果</h5>
+                                <h5 class="modal-title" id="detailed-result-label-2">查询结果</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -312,7 +304,7 @@
             <div class="tab-pane fade" id="shishen-rank" role="tabpanel" aria-labelledby="shishen-rank-tab">
                 <p>
                 <p></p>
-                <h4 style="text-align: center;">式神外战每周胜率榜&nbsp;<img id="info-img" src="assets/img/info-circle-fill.svg"
+                <h4 style="text-align: center;">式神外战每周胜率榜&nbsp;<img id="info-img" src="../static/assets/img/info-circle-fill.svg"
                         alt="" width="16" height="16" title="胜率因人而异，仅作参考。"></h4>
 
                 <p style="text-align: center;">
@@ -334,7 +326,7 @@
                         感谢@老铁炸心了的建议和整理以及各位作者的付出。如果有作者不希望您的作品被列在此处，请告知本人(Ahrisy)尽快进行删除。如果发现错误或者想推荐攻略和工具，也欢迎联系。</font>
                 </p>
                 <div class="container" style="max-width: 90%;">
-                    <div id="accordion">
+                    <div id="accordion1">
                         <div class="card">
                             <div class="card-header" id="headingOne">
                                 <h5 class="mb-0">
@@ -566,7 +558,7 @@
                         发现bug或者有好的建议欢迎联系~</font>
                 </p>
                 <div class="container" style="max-width: 90%;">
-                    <div id="accordion">
+                    <div id="accordion2">
                         <div class="card">
                             <div class="card-header" id="heading1">
                                 <h5 class="mb-0">
@@ -715,17 +707,7 @@
         </div>
     </div>
     </div>
-
-    <!-- 3rd party javascript -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.18/dist/js/bootstrap-select.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.18/dist/js/i18n/defaults-zh_CN.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.17.1/dist/bootstrap-table.min.js"></script>
-    <!-- my js -->
-    <script src="js/yysrank.js"></script>
+<script src="../legacy/yysrank.js"></script>
 </body>
 
 </html>
