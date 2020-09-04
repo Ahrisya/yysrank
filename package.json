@@ -4,12 +4,12 @@
   "description": "阴阳师阵容胜率查询及阵容推荐 [https://yysrank.ahrisy.com](https://yysrank.ahrisy.com)",
   "main": "index.js",
   "scripts": {
-    "clean": "rm -r dist",
+    "clean": "rm -r public",
     "build": "npm run build-prod",
     "build-dev": "webpack -d --mode development",
     "build-prod": "webpack -p --mode production",
     "start": "webpack-dev-server -d --mode development",
-    "preview": "npm run build-prod && browser-sync start --server dist",
+    "preview": "npm run build-prod && browser-sync start --server public",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
