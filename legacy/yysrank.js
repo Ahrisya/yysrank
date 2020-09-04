@@ -334,20 +334,6 @@ function createProgBar(v, maxv) {
     return html
 }
 
-function getRankChange(c) {
-    var html
-    if (c == 'new') {
-        html = '<font color="blue">new</font>'
-    } else if (c > 0) {
-        html = '<img src="./assets/img/icon-championtier-up.png" alt=""><font color="green">' + String(c) + '</font>'
-    } else if (c < 0) {
-        html = '<img src="./assets/img/icon-championtier-down.png" alt=""><font color="red">' + String(-c) + '</font>'
-    } else {
-        html = '<img src="./assets/img/icon-championtier-stay.png" alt=""><font color="gray">' + String(c) + '</font>'
-    }
-    return html
-}
-
 function initShishenRank() {
     var url = "json/shishen_rank.json"
     var request = new XMLHttpRequest()

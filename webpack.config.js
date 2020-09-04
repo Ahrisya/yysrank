@@ -61,7 +61,7 @@ const config = {
                         options: {
                             // outputPath: 'images',
                             // 将图片生成至原来的目录
-                            outputPath: 'assets/img',
+                            outputPath: 'assets/images',
                             name: '[name].[ext]',
                         }
                     }

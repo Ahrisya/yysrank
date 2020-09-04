@@ -1,4 +1,4 @@
-export function demo() {
+const demo = () => {
     console.log("demo");
 }
 
