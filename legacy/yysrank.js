@@ -529,17 +529,6 @@ function queryWinRate() {
     }
 }
 
-function getTeamIcons(t) {
-    var team_icons = ""
-    for (var i in t) {
-        var key = t[i]
-        var icon = shishen_json[key]["icon"]
-        var name = shishen_json[key]["name"]
-        team_icons += "<img src=\"" + icon + "\"  alt=" + name + " width=\"40\" height=\"40\"> &nbsp;"
-    }
-    return team_icons
-}
-
 function addResult(win_num, loss_num) {
     var own_team_icons = getTeamIcons(ownteam)
     var enemy_team_icons = getTeamIcons(enemyteam)
