@@ -41,8 +41,8 @@ function showUpdates () {
     if (getCookie("lastupdate") != last_update_date){
         $('#new_updates').modal('show')
         setCookie("lastupdate", last_update_date, 1000)
-    } 
-        
+    }
+
 }
 
 
