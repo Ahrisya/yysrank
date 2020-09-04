@@ -29,7 +29,7 @@ const config = {
                 exclude: /(node_modules|legacy)/
             },
             {
-                test: /\.(htm|html)$/i,
+                test: /\.(ejs|htm|html)$/i,
                 use: 'html-loader'
             },
             {
@@ -61,7 +61,6 @@ const config = {
             patterns: [{from: 'static/'}],
         }),
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, 'src/index.html'),
             inject: 'head', // 不能使用默认值，因为遗留的js会因此而报错
         }),
         // CDN的配置，这里的库会默认注入到网页中
