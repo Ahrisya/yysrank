@@ -177,6 +177,5 @@ const initTables = () => {
         }]
     })
 };
-;
 
 export default initTables;
