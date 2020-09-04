@@ -5,6 +5,7 @@ import demo from "./demo";
 import getRankChange from "./rank-change";
 import getTeamIcons from "./team-icons";
 import initShishenRank from "./init/shishen-rank";
+import initTables from "./init/table";
 
 $(window).on('load', function () {
     console.log("window done");
@@ -18,5 +19,6 @@ $(window).on('load', function () {
 
 // 注册给遗留系统
 window.demo = demo;
+window.initTables = initTables;
 window.getRankChange = getRankChange;
 window.getTeamIcons = getTeamIcons;
