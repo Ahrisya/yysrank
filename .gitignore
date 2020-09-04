@@ -297,3 +297,6 @@ $RECYCLE.BIN/
 # .pnp.*
 
 # End of https://www.toptal.com/developers/gitignore/api/yarn,node,linux,macos,windows,jetbrains+all,visualstudiocode
+
+### 自定义 ###
+public/

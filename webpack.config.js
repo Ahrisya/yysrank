@@ -9,7 +9,7 @@ const WebpackCdnPlugin = require('webpack-cdn-plugin');
 const config = {
     entry: './src/index.js',
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'public'),
     },
     module: {
         rules: [
