@@ -41,6 +41,7 @@ const config = {
                         : MiniCssExtractPlugin.loader,
                     // 将 CSS 转化成 CommonJS 模块
                     'css-loader',
+                    'svg-transform-loader/encode-query', // loader should be defined BEFORE css-loader
                     // 将 Sass 编译成 CSS
                     'sass-loader',
                 ],
@@ -53,7 +54,7 @@ const config = {
                 ]
             },
             {
-                test: /\.(png|jpg|gif|svg)$/,
+                test: /\.(png|jpg|gif)$/,
                 use: [
                     {
                         loader: 'file-loader',
@@ -66,6 +67,23 @@ const config = {
                     }
                 ]
             },
+            {
+                test: /\.svg(\?.*)?$/, // match img.svg and img.svg?param=value
+                use: [
+                    'url-loader', // or file-loader or svg-url-loader
+                    'svg-transform-loader'
+                ]
+            },
+            {
+                test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]',
+                        outputPath: './assets/fonts'
+                    }
+                }]
+            },
         ]
     },
     plugins: [
@@ -74,6 +92,11 @@ const config = {
             patterns: [{from: 'static/'}],
         }),
         new HtmlWebpackPlugin({
+            inject: 'head', // 不能使用默认值，因为遗留的js会因此而报错
+        }),
+        new HtmlWebpackPlugin({
+            filename: "demo.html",
+            template: path.resolve(__dirname, "./src/demo.ejs"),
             inject: 'head', // 不能使用默认值，因为遗留的js会因此而报错
         }),
         // CDN的配置，这里的库会默认注入到网页中
