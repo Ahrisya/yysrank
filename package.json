@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/undancer/yysrank.git"
+    "url": "git+https://github.com/Ahrisya/yysrank.git"
   },
   "author": "",
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/undancer/yysrank/issues"
+    "url": "https://github.com/Ahrisya/yysrank/issues"
   },
-  "homepage": "https://github.com/undancer/yysrank#readme",
+  "homepage": "https://github.com/Ahrisya/yysrank#readme",
   "devDependencies": {
     "@babel/core": "^7.11.5",
     "@babel/preset-env": "^7.11.5",
