@@ -1,6 +1,6 @@
 import shishenTable from "../static/json/shishen.json";
 
-function getTeamIcons(t) {
+const getTeamIcons = t => {
     let team_icons = "";
     for (let i in t) {
         let key = t[i];
@@ -9,6 +9,6 @@ function getTeamIcons(t) {
         team_icons += "<img src=\"" + icon + "\"  alt=" + name + " width=\"40\" height=\"40\"> &nbsp;"
     }
     return team_icons
-}
+};
 
 export default getTeamIcons;
