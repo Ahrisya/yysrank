@@ -7,6 +7,7 @@ import getTeamIcons from "./team-icons";
 import initShishenRank from "./init/shishen-rank";
 import initTables from "./init/table";
 import initOptions from "./init/shishen";
+import initData from "./init/data";
 
 $(window).on('load', function () {
     console.log("window done");
@@ -14,6 +15,7 @@ $(window).on('load', function () {
     initTables();
     initShishenRank();
     showUpdates();
+    initData();
     demo();
 });
 

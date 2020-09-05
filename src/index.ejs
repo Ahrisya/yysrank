@@ -16,27 +16,6 @@
 
         gtag('config', 'UA-128562086-3');
     </script>
-
-</head>
-<script>
-    var data
-    var url = "json/data.json"
-    var request = new XMLHttpRequest()
-    request.open("get", url)
-    request.send(null)
-    request.onload = function () {
-        console.log(request.status)
-        if (request.status == 200) {
-            data = JSON.parse(request.responseText)
-            document.getElementById("loadingDiv").style.display = "none";
-        }
-        else {
-            document.getElementById("loadingDiv").style.display = "none";
-            alert("数据加载失败,请尝试刷新网页！\n错误代码： " + String(request.status))
-        }
-
-    }
-</script>
 </head>
 
 <body>
