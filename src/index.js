@@ -8,6 +8,7 @@ import initShishenRank from "./init/shishen-rank";
 import initTables from "./init/table";
 import initOptions from "./init/shishen";
 import initData from "./init/data";
+import queryWinRate from "./query-win-rate";
 
 $(window).on('load', function () {
     console.log("window done");
@@ -25,3 +26,4 @@ window.demo = demo;
 window.initTables = initTables;
 window.getRankChange = getRankChange;
 window.getTeamIcons = getTeamIcons;
+window.queryWinRate = queryWinRate;
