@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const WebpackCdnPlugin = require('webpack-cdn-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const config = {
     entry: './src/index.js',
@@ -133,7 +134,29 @@ const config = {
         }),
         new MiniCssExtractPlugin(),
         new CleanWebpackPlugin()
-    ]
+    ],
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                vendors: {
+                    name: 'chunk-vendors',
+                    test: /[\\/]node_modules[\\/]/,
+                    priority: -10,
+                    chunks: 'initial'
+                },
+                common: {
+                    name: 'chunk-common',
+                    minChunks: 2,
+                    priority: -20,
+                    chunks: 'initial',
+                    reuseExistingChunk: true
+                }
+            }
+        },
+        minimizer: [
+            new TerserPlugin()
+        ]
+    }
 };
 
 module.exports = config;
