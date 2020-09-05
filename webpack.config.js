@@ -33,6 +33,20 @@ const config = {
                 use: 'html-loader'
             },
             {
+                test: /\.s[ac]ss$/i,
+                use: [
+                    // 将 JS 字符串生成为 style 节点
+                    process.env.NODE_ENV !== 'production'
+                        ? 'style-loader'
+                        : MiniCssExtractPlugin.loader,
+                    // 将 CSS 转化成 CommonJS 模块
+                    'css-loader',
+                    'svg-transform-loader/encode-query', // loader should be defined BEFORE css-loader
+                    // 将 Sass 编译成 CSS
+                    'sass-loader',
+                ],
+            },
+            {
                 test: /\.css$/,
                 use: [
                     MiniCssExtractPlugin.loader,
@@ -40,18 +54,35 @@ const config = {
                 ]
             },
             {
-                test: /\.(png|jpg|gif|svg)$/,
+                test: /\.(png|jpg|gif)$/,
                 use: [
                     {
                         loader: 'file-loader',
                         options: {
                             // outputPath: 'images',
                             // 将图片生成至原来的目录
-                            outputPath: 'assets/img',
+                            outputPath: 'assets/images',
                             name: '[name].[ext]',
                         }
                     }
                 ]
+            },
+            {
+                test: /\.svg(\?.*)?$/, // match img.svg and img.svg?param=value
+                use: [
+                    'url-loader', // or file-loader or svg-url-loader
+                    'svg-transform-loader'
+                ]
+            },
+            {
+                test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]',
+                        outputPath: './assets/fonts'
+                    }
+                }]
             },
         ]
     },
@@ -60,8 +91,12 @@ const config = {
         new CopyPlugin({
             patterns: [{from: 'static/'}],
         }),
+        new HtmlWebpackPlugin({ // 默认入口为src/index.ejs
+            inject: 'head', // 不能使用默认值，因为遗留的js会因此而报错
+        }),
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, 'src/index.html'),
+            filename: "demo.html",
+            template: path.resolve(__dirname, "./src/demo.ejs"),
             inject: 'head', // 不能使用默认值，因为遗留的js会因此而报错
         }),
         // CDN的配置，这里的库会默认注入到网页中

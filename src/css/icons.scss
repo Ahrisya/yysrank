@@ -1,0 +1,43 @@
+@import "icons/bootstrap-icons.scss";
+//@import "icons/fontawesome-free.scss";
+
+$up-color: #28a745; // green;
+$equals-color: #6c757d; // gray;
+$down-color: #dc3545; // red;
+
+.icon-champion-tier-up {
+  @extend .bi-play;
+  @include fill-background-image('~bootstrap-icons/icons/play.svg', $up-color);
+  transform: rotate(-90deg);
+}
+
+.icon-champion-tier-stay {
+  @extend .bi-pause;
+  @include fill-background-image('~bootstrap-icons/icons/pause.svg', $equals-color);
+  transform: rotate(90deg);
+}
+
+.icon-champion-tier-down {
+  @extend .bi-play;
+  @include fill-background-image('~bootstrap-icons/icons/play.svg', $down-color);
+  transform: rotate(90deg);
+}
+
+
+.icon-champion-tier-up-fill {
+  @extend .bi-play-fill;
+  @include fill-background-image('~bootstrap-icons/icons/play-fill.svg', $up-color);
+  transform: rotate(-90deg);
+}
+
+.icon-champion-tier-stay-fill {
+  @extend .bi-pause-fill;
+  @include fill-background-image('~bootstrap-icons/icons/pause-fill.svg', $equals-color);
+  transform: rotate(90deg);
+}
+
+.icon-champion-tier-down-fill {
+  @extend .bi-play-fill;
+  @include fill-background-image('~bootstrap-icons/icons/play-fill.svg', $down-color);
+  transform: rotate(90deg);
+}
