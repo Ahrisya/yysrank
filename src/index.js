@@ -1,4 +1,3 @@
-import "./yysrank.css"
 import "./index.scss"
 import "./css/icons.scss"
 import demo from "./demo";
