@@ -4,14 +4,18 @@
 
 ```
 ├── public              # 项目发布的地址，该文件的内容是通过指令自动产生的
-├── legacy              # 遗留代码所在的位置，由于大量代码不符合规范导致使用node无法正常编译
+├── legacy              # 遗留代码所在的位置，现在已经不存在
 │   └── yysrank.js
 ├── src                 # 未来代码所在的位置，新的代码可以尝试写在里面，打包工具会将它统一编译打包
-│   ├── index.html
+│   ├── data            # **目前数据所在的位置**
+│   ├── images          # 图片
+│   ├── styles          # 样式表
+│   ├── views           # 布局相关的页面
+│   ├── panels          # 具体的功能子页
+│   ├── index.ejs
 │   ├── index.js
-│   └── yysrank.css
-├── static              # 遗留的静态资源，当ajax不再需要它们时，会移除
-│   ├── assets
+├── static              
+│   ├── assets          # 遗留静态资源，大部分静态资源已经转移，待全部完成后删除该目录
 │   │   └── img
 │   │       ├── icon-championtier-down.png
 │   │       ├── icon-championtier-stay.png
@@ -20,11 +24,10 @@
 │   │       ├── loading.gif
 │   │       ├── minus3.png
 │   │       └── three-dots.svg
-│   └── json            # 更新的json数据请放到此处
+│   └── json            # 已移动到src/data目录下
 │       ├── data.json
 │       ├── shishen.json
 │       └── shishen_rank.json
-├── HELP.md
 ├── LICENSE
 ├── README.md
 ├── package.json        # node项目的依赖定义入口

@@ -1,5 +1,5 @@
 import "./index.scss"
-import "./css/icons.scss"
+import "./styles/icons.scss"
 import demo from "./demo";
 import getRankChange from "./rank-change";
 import getTeamIcons from "./team-icons";
