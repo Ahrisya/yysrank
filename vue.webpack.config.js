@@ -6,6 +6,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const WebpackCdnPlugin = require('webpack-cdn-plugin');
 
+const VueConfig = {
+
+};
+
 const config = {
     entry: './src/index.js',
     output: {
