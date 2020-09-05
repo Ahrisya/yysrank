@@ -2,7 +2,14 @@ import rankTable from "../../static/json/shishen_rank.json";
 import getTeamIcons from "../team-icons";
 import shishenTable from "../../static/json/shishen.json";
 import getRankChange from "../rank-change";
+import {toPercent} from "../utils/numbers"
 
+
+function createProgBar(v, maxv) {
+    var w = toPercent(v / maxv)
+    var html = '<div class="progress" style="height: 25px;" placeholder="test"><div class="progress-bar" style="width: ' + w + ';background-color:#0489B1" role="progressbar" aria-valuenow="' + v + '" aria-valuemin="0" aria-valuemax="100"></div><p style="left:' + w + '">' + toPercent(v) + '</p></div>'
+    return html
+}
 
 const initShishenRank = () => {
     var shishen_rank = [];

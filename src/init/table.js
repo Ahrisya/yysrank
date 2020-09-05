@@ -1,3 +1,23 @@
+function sortingData(sortName, sortOrder, data) {
+    var order = sortOrder === 'desc' ? -1 : 1
+    data.sort(function (a, b) {
+        var aa = a[sortName]
+        var bb = b[sortName]
+        if (typeof (aa) == 'string') {
+            aa = Number(a[sortName].replace('%', ''))
+            bb = Number(b[sortName].replace('%', ''))
+        }
+        if (aa < bb) {
+            return order * -1
+        }
+        if (aa > bb) {
+            return order
+        }
+        return 0
+    })
+}
+
+
 const initTables = () => {
     $('#query-result').bootstrapTable({
         classes: "table table-striped table-bordered table-hover",
