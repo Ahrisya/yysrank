@@ -29,7 +29,7 @@ const config = {
                 exclude: /(node_modules|legacy)/
             },
             {
-                test: /\.(ejs|htm|html)$/i,
+                test: /\.(htm|html)$/i,
                 use: 'html-loader'
             },
             {
@@ -91,7 +91,7 @@ const config = {
         new CopyPlugin({
             patterns: [{from: 'static/'}],
         }),
-        new HtmlWebpackPlugin({
+        new HtmlWebpackPlugin({ // 默认入口为src/index.ejs
             inject: 'head', // 不能使用默认值，因为遗留的js会因此而报错
         }),
         new HtmlWebpackPlugin({
