@@ -1,4 +1,4 @@
-import shishenTable from "../static/json/shishen.json";
+import shishenTable from "./data/shishen.json";
 
 const getTeamIcons = t => {
     let team_icons = "";

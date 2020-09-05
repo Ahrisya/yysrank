@@ -1,3 +1,4 @@
+import moreIcon from "bootstrap-icons/icons/three-dots.svg"
 import {sortNum, toPercent} from "./utils/numbers"
 import globals from "./globals";
 
@@ -98,6 +99,7 @@ function renderDetailedResult(detailed_data) {
     $('#query-progress')[0].style.display = "none"
 }
 
+
 function addResult(win_num, loss_num) {
     var own_team_icons = getTeamIcons(ownteam)
     var enemy_team_icons = getTeamIcons(enemyteam)
@@ -108,7 +110,7 @@ function addResult(win_num, loss_num) {
     }
     historynum++
 
-    var more_detail = '<button class="detail-button" type="button" onclick="showHistoryDetail(' + String(historynum) + ')">' + '<img src="assets/img/three-dots.svg" alt="" width="16" height="16" title="详细胜率"></img></button>'
+    var more_detail = '<button class="detail-button" type="button" onclick="showHistoryDetail(' + String(historynum) + ')">' + '<img src="' + moreIcon + '" alt="" width="16" height="16" title="详细胜率"></img></button>'
 
     var new_result = [{
         history: historynum,
