@@ -5,105 +5,80 @@
         sub-title="This is a subtitle"
         title="Title"
     />
-    <a-table :columns="columns" :data-source="data">
-      <a slot="name" slot-scope="text">{{ text }}</a>
-      <span slot="customTitle"><a-icon type="smile-o" /> Name</span>
-      <span slot="tags" slot-scope="tags">
-      <a-tag
-          v-for="tag in tags"
-          :key="tag"
-          :color="tag === 'loser' ? 'volcano' : tag.length > 5 ? 'geekblue' : 'green'"
-      >
-        {{ tag.toUpperCase() }}
-      </a-tag>
-    </span>
-      <span slot="action" slot-scope="text, record">
-      <a>Invite 一 {{ record.name }}</a>
-      <a-divider type="vertical" />
-      <a>Delete</a>
-      <a-divider type="vertical" />
-      <a class="ant-dropdown-link"> More actions <a-icon type="down" /> </a>
-    </span>
+    <a-table :data-source="data" :pagination="{ pageSize:30 }">
+      <a-table-column key="index" data-index="index" title="#"/>
+      <a-table-column key="point">
+        <template v-slot="{point}">
+          <p v-if="(typeof point) === 'string'" :style="{color: '#007bff'}">
+            {{ point }}
+          </p>
+          <p v-else-if="(typeof point) === 'number' && point > 0">
+            <a-icon :style="{ color: '#28a745' }" type="arrow-up"/>
+            {{ point }}
+          </p>
+          <p v-else-if="(typeof point) === 'number' && point < 0">
+            <a-icon :style="{ color: '#dc3545' }" type="arrow-down"/>
+            {{ Math.abs(point) }}
+          </p>
+          <p v-else-if="(typeof point) === 'number' && point == 0">
+            <a-icon :rotate=90 :style="{ color:'#6c757d' }" type="pause"/>
+            {{ point }}
+          </p>
+        </template>
+      </a-table-column>
+      <a-table-column key="id" title="式神">
+        <template v-slot="{id}">
+          <Hero :id="id"/>
+        </template>
+      </a-table-column>
+      <a-table-column key="win_rate" title="外战胜率">
+        <template v-slot="{win_rate}">
+          <a-progress :format="percent => `${percent.toFixed(2)} %`" :percent="win_rate"/>
+        </template>
+      </a-table-column>
+      <a-table-column key="use_rate" title="选用率">
+        <template v-slot="{use_rate}">
+          <a-progress :format="percent => `${percent.toFixed(2)} %`" :percent="use_rate*100"/>
+        </template>
+      </a-table-column>
+      <a-table-column key="count" data-index="count" title="外战次数"/>
     </a-table>
   </div>
 </template>
 
-<script>
+<script type="ts">
 
 import {Vue} from "vue-property-decorator";
-import {Icon, PageHeader, Table,Divider,Tag} from "ant-design-vue";
+import {Divider, Icon, PageHeader, Progress, Table} from "ant-design-vue";
+import rankTable from "../data/shishen_rank.json"
+import Hero from "./Hero";
 
 Vue.use(PageHeader)
 Vue.use(Table)
 Vue.use(Icon)
 Vue.use(Divider)
-Vue.use(Tag)
-
-// 式神
-// 外战胜率
-// 选用率
-// 外战次数
-
-const columns = [
-  {
-    dataIndex: 'name',
-    key: 'name',
-    slots: { title: 'customTitle' },
-    scopedSlots: { customRender: 'name' },
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-  },
-  {
-    title: 'Tags',
-    key: 'tags',
-    dataIndex: 'tags',
-    scopedSlots: { customRender: 'tags' },
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    scopedSlots: { customRender: 'action' },
-  },
-];
-
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-];
+Vue.use(Progress)
 
 export default {
   name: "Rank",
+  components: {
+    Hero
+  },
   data() {
+    const tables = Object.entries(rankTable).map(([, values]) => {
+      const row = {};
+      const columns = ['index', 'point', 'id', 'win_rate', 'use_rate', 'count']
+      values.forEach((value, index) => {
+        Object.assign(row, {[columns[index]]: value});
+        if (columns[index] === 'index') {
+          Object.assign(row, {'key': value});
+        }
+      })
+      return row
+    });
+
     return {
-      data,
-      columns,
+      data: tables,
     };
   },
 };

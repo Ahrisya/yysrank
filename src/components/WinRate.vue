@@ -4,7 +4,7 @@
 
 <script>
 export default {
-name: "WinRate"
+  name: "WinRate"
 }
 </script>
 
