@@ -1,8 +1,8 @@
 <template>
   <div>
-    <a-tabs default-active-key="2">
+    <a-tabs default-active-key="1">
       <a-tab-pane key="1" tab="阵容胜率排行">
-        <ReadMe/>
+        <WinRate/>
       </a-tab-pane>
       <a-tab-pane key="2" tab="排行榜">
         <Rank/>
@@ -24,18 +24,18 @@
 import 'ant-design-vue/dist/antd.css'; // or 'ant-design-vue/dist/antd.less'
 import {Component, Vue} from "vue-property-decorator";
 import {Tabs} from "ant-design-vue";
-import ReadMe from "./ReadMe";
 import MoreTools from "@/components/MoreTools.vue";
 import Tutorial from "@/components/Tutorial.vue";
 import Recommend from "@/components/Recommend.vue";
 import Rank from "@/components/Rank.vue";
+import WinRate from "@/components/WinRate.vue";
 
 Vue.use(Tabs)
 
 @Component({
   components: {
+    WinRate,
     Rank,
-    ReadMe,
     Tabs,
     Recommend,
     MoreTools,
