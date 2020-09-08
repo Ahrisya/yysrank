@@ -92,8 +92,8 @@
       <!--      </a-layout-sider>-->
       <a-layout style="padding: 0 24px 24px">
         <a-page-header
-            :title="title"
             :sub-title="subTitle"
+            :title="title"
         />
         <!--        <a-page-header-->
         <!--            :title="title"-->

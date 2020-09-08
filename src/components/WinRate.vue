@@ -30,44 +30,38 @@
     <!--      </a-form-item>-->
     <!--    </a-form>-->
     <div id="components-form-demo-advanced-search">
-      <a-form :form="form" class="ant-advanced-search-form" @submit="handleSearch">
-        <a-row :gutter="24">
-          <a-col
-              v-for="i in 10"
-              :key="i"
-              :span="8"
-              :style="{ display: i < count ? 'block' : 'none' }"
-          >
-            <a-form-item :label="`Field ${i}`">
-              <a-input
-                  v-decorator="[
-                `field-${i}`,
-                {
-                  rules: [
-                    {
-                      required: true,
-                      message: 'Input something!',
-                    },
-                  ],
-                },
-              ]"
-                  placeholder="placeholder"
-              />
+      <a-form layout="horizontal">
+        <!-- ban 位 -->
+        <a-row>
+          <a-col :span="12">
+            <a-form-item :label-col="{ span: 4 }" :wrapper-col="{ span:8 }" label="我方ban位">
+              <a-input placeholder="placeholder"/>
+            </a-form-item>
+          </a-col>
+          <a-col :span="12">
+            <a-form-item :label-col="{ span: 4 }" :wrapper-col="{ span:8 }" label="敌方ban位">
+              <a-input placeholder="placeholder"/>
+            </a-form-item>
+          </a-col>
+        </a-row>
+        <!-- 五个可选位置 -->
+        <a-row v-for="i in 5" :key="i">
+          <a-col :span="12">
+            <a-form-item :label-col="{ span: 4 }" :wrapper-col="{ span:8 }" :label="`我方${i}号位`">
+              <a-input placeholder="placeholder"/>
+            </a-form-item>
+          </a-col>
+          <a-col :span="12">
+            <a-form-item :label-col="{ span: 4 }" :wrapper-col="{ span:8 }" :label="`敌方${i}号位`">
+              <a-input placeholder="placeholder"/>
             </a-form-item>
           </a-col>
         </a-row>
         <a-row>
-          <a-col :span="24" :style="{ textAlign: 'right' }">
+          <a-col :span="24" :style="{ textAlign: 'center' }">
             <a-button html-type="submit" type="primary">
               Search
             </a-button>
-            <a-button :style="{ marginLeft: '8px' }" @click="handleReset">
-              Clear
-            </a-button>
-            <a :style="{ marginLeft: '8px', fontSize: '12px' }" @click="toggle">
-              Collapse
-              <a-icon :type="expand ? 'up' : 'down'"/>
-            </a>
           </a-col>
         </a-row>
       </a-form>
