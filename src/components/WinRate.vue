@@ -30,7 +30,7 @@
     <!--      </a-form-item>-->
     <!--    </a-form>-->
     <div id="components-form-demo-advanced-search">
-      <a-form layout="horizontal" :form="form" @submit="handleSearch">
+      <a-form :form="form" layout="horizontal" @submit="handleSearch">
         <!-- ban 位 -->
         <a-row>
           <a-col :span="12">

@@ -19,6 +19,13 @@
 
 import heroTable from "@/data/shishen.json"
 
+const mapper = {
+  '2': 'N',
+  '3': 'R',
+  '4': 'SR',
+  '5': 'SSR',
+  '6': 'SP',
+}
 
 const groupBy = (array, id) => {
   const groups = {};
@@ -33,40 +40,18 @@ const groupBy = (array, id) => {
 export default {
   name: "HeroSelect",
   data() {
-    console.log("DATA");
-    const options = Object.entries(groupBy(Object.values(heroTable), 'rarity')).map(([key, values]) => {
-      let result = {value: key}
-      switch (key) {
-        case '2': // N
-          result = {...result, label: 'N'}
-          break;
-        case '3': // R
-          result = {...result, label: 'R'}
-          break;
-        case '4': // SR
-          result = {...result, label: 'SR'}
-          break;
-        case '5': // SSR
-          result = {...result, label: 'SSR'}
-          break;
-        case '6': // SP
-          result = {...result, label: 'SP'}
-          break;
-        default:
-          result = {...result, label: '阴阳师'}
-          console.log(key);
-          break;
-      }
-      const children = values.map(value => {
-        const {id, name, icon} = value;
-        return {label: name, value: id, icon}
-      });
-
-      result = {...result, children};
-
-      return result;
-    })
-
+    const options = Object
+        .entries(groupBy(Object.values(heroTable), 'rarity')) // 将式神数据按位阶分组
+        .map(([key, values]) => { // 将式神数据处理成下拉选择器所需要的格式
+          const result = {value: key, label: mapper[key]}
+          const children = values.map(value => {
+            const {id, name, icon} = value; // 只读取式神的id，名字和图标
+            return {label: name, value: id, icon}
+          });
+          return {...result, children};
+        })
+        .filter(value => Object.values(mapper).indexOf(value.label) > 0) // 不显示没有位阶的阴阳师
+        .sort((a, b) => b.value - a.value) // 降序排序
     return {
       options,
     };
