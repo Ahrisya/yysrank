@@ -1,11 +1,5 @@
 <template>
   <div>
-    <a-page-header
-        :breadcrumb="{ props: { routes } }"
-        style="border: 1px solid rgb(235, 237, 240)"
-        sub-title="感谢@老铁炸心了的建议和整理以及各位作者的付出。如果有作者不希望您的作品被列在此处，请告知本人(Ahrisy)尽快进行删除。如果发现错误或者想推荐攻略和工具，也欢迎联系。"
-        title="MoreTools"
-    />
     <a-collapse v-model="activeKey">
       <a-collapse-panel key="1" header="工具">
         <ul>
@@ -148,31 +142,6 @@ Vue.use(PageHeader)
 
 export default {
   name: "MoreTools",
-  data() {
-    return {
-      text: `A dog is a type of domesticated animal.Known for its loyalty and faithfulness,it can be found as a welcome guest in many households across the world.`,
-      activeKey: ['1'],
-      routes: [
-        {
-          path: 'index',
-          breadcrumbName: 'First-level Menu',
-        },
-        {
-          path: 'first',
-          breadcrumbName: 'Second-level Menu',
-        },
-        {
-          path: 'second',
-          breadcrumbName: 'Third-level Menu',
-        },
-      ],
-    };
-  },
-  watch: {
-    activeKey(key) {
-      console.log(key);
-    },
-  },
 };
 </script>
 

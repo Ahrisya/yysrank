@@ -91,12 +91,15 @@
       <!--        </a-menu>-->
       <!--      </a-layout-sider>-->
       <a-layout style="padding: 0 24px 24px">
-
-        <a-breadcrumb style="margin: 16px 0">
-          <a-breadcrumb-item>Home</a-breadcrumb-item>
-          <a-breadcrumb-item>List</a-breadcrumb-item>
-          <a-breadcrumb-item>App</a-breadcrumb-item>
-        </a-breadcrumb>
+        <a-page-header
+            :title="title"
+            :sub-title="subTitle"
+        />
+        <!--        <a-page-header-->
+        <!--            :title="title"-->
+        <!--            :sub-title="subTitle"-->
+        <!--            :breadcrumb="{ props: { routes } }"-->
+        <!--        />-->
 
         <a-layout-content
             :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
@@ -111,16 +114,41 @@
 <script>
 export default {
   name: "Layout",
+  watch: {
+    $route() {
+      this.refreshTitle();
+    }
+  },
   methods: {
-    click: function ({item, key, keyPath}) {
-      console.log(item);
-      console.log(key);
-      console.log(keyPath);
+    refreshTitle() {
+      const {title, subTitle} = this.$route.meta;
+      if (title !== undefined) {
+        this.title = title;
+      }
+      if (subTitle !== undefined) {
+        this.subTitle = subTitle;
+      }
     },
   },
   data() {
     return {
       collapsed: false,
+      title: 'title',
+      subTitle: 'sub-title',
+      // routes: [
+      //   {
+      //     path: 'index',
+      //     breadcrumbName: 'First-level Menu',
+      //   },
+      //   {
+      //     path: 'first',
+      //     breadcrumbName: 'Second-level Menu',
+      //   },
+      //   {
+      //     path: 'second',
+      //     breadcrumbName: 'Third-level Menu',
+      //   },
+      // ],
     };
   },
 }

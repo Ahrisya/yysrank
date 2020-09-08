@@ -1,11 +1,5 @@
 <template>
   <div>
-    <a-page-header
-        :breadcrumb="{ props: { routes } }"
-        style="border: 1px solid rgb(235, 237, 240)"
-        sub-title="发现bug或者有好的建议欢迎联系~"
-        title="Tutorial"
-    />
     <a-collapse v-model="activeKey">
       <a-collapse-panel key="1" header="使用方法">
         <ul>
@@ -95,31 +89,6 @@ Vue.use(PageHeader)
 
 export default {
   name: "Tutorial",
-  data() {
-    return {
-      text: `A dog is a type of domesticated animal.Known for its loyalty and faithfulness,it can be found as a welcome guest in many households across the world.`,
-      activeKey: ['1'],
-      routes: [
-        {
-          path: 'index',
-          breadcrumbName: 'First-level Menu',
-        },
-        {
-          path: 'first',
-          breadcrumbName: 'Second-level Menu',
-        },
-        {
-          path: 'second',
-          breadcrumbName: 'Third-level Menu',
-        },
-      ],
-    };
-  },
-  watch: {
-    activeKey(key) {
-      console.log(key);
-    },
-  },
 };
 </script>
 

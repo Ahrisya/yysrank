@@ -1,10 +1,5 @@
 <template>
   <div>
-    <a-page-header
-        style="border: 1px solid rgb(235, 237, 240)"
-        sub-title="This is a subtitle"
-        title="Title"
-    />
     <a-table :data-source="data" :pagination="{ pageSize:30 }">
       <a-table-column key="index" data-index="index" title="#"/>
       <a-table-column key="point">
