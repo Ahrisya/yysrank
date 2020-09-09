@@ -35,14 +35,12 @@
         <a-row>
           <a-col :span="12">
             <a-form-item :label-col="{ span: 4 }" :wrapper-col="{ span:8 }" label="我方ban位">
-              <a-input v-decorator="[`that-ban`]" placeholder="placeholder">
-              </a-input>
-              <HeroSelect></HeroSelect>
+              <HeroSelect v-decorator="[`this-ban`]" placeholder="place_holder"/>
             </a-form-item>
           </a-col>
           <a-col :span="12">
             <a-form-item :label-col="{ span: 4 }" :wrapper-col="{ span:8 }" label="敌方ban位">
-              <a-input v-decorator="[`that-ban`]" placeholder="placeholder"/>
+              <HeroSelect v-decorator="[`that-ban`]" placeholder="place_holder"/>
             </a-form-item>
           </a-col>
         </a-row>
@@ -50,12 +48,12 @@
         <a-row v-for="i in 5" :key="i">
           <a-col :span="12">
             <a-form-item :label="`我方${i}号位`" :label-col="{ span: 4 }" :wrapper-col="{ span:8 }">
-              <a-input v-decorator="[`this-${i}`]" placeholder="placeholder"/>
+              <HeroSelect v-decorator="[`this-${i}`]" placeholder="place_holder"/>
             </a-form-item>
           </a-col>
           <a-col :span="12">
             <a-form-item :label="`敌方${i}号位`" :label-col="{ span: 4 }" :wrapper-col="{ span:8 }">
-              <a-input v-decorator="[`that-${i}`]" placeholder="placeholder"/>
+              <HeroSelect v-decorator="[`that-${i}`]" placeholder="place_holder"/>
             </a-form-item>
           </a-col>
         </a-row>
@@ -121,7 +119,8 @@ export default {
   methods: {
     handleSearch(e) {
       e.preventDefault();
-      // this.form.
+      const values = this.form.getFieldsValue();
+      console.log(values);
       this.form.validateFields((error, values) => {
         console.log('error', error);
         console.log('Received values of form: ', values);

@@ -1,7 +1,9 @@
 <template>
   <div>
-    <a-avatar :size="48" :src="this.$data.icon" shape="square"/>
-    {{ this.$data.name }}
+    <a-avatar :size="size" :src="this.$data.icon" shape="square"/>
+    <span v-if="showName">
+      {{ this.$data.name }}
+    </span>
   </div>
 </template>
 
@@ -15,6 +17,14 @@ export default {
     id: {
       type: Number,
       required: true
+    },
+    size: {
+      type: Number,
+      default: 48
+    },
+    showName: {
+      type: Boolean,
+      default: true
     }
   },
   data() {

@@ -1,13 +1,15 @@
 <template>
   <a-cascader
+      size="large"
       :options="options"
       :show-search="{ filter }"
-      placeholder="Please select"
+      :placeholder="placeholder"
       @change="onChange"
   >
     <template slot="displayRender" slot-scope="{ labels, selectedOptions }">
       <span v-for="(label, index) in labels" :key="selectedOptions[index].value">
         <span v-if="index === labels.length - 1">
+<!--          <Hero :id="selectedOptions[index].value" :size="16" :show-name="false"/>-->
           {{ label }}
         </span>
       </span>
@@ -39,6 +41,10 @@ const groupBy = (array, id) => {
 
 export default {
   name: "HeroSelect",
+  // components: {Hero},
+  props: {
+    placeholder: String,
+  },
   data() {
     const options = Object
         .entries(groupBy(Object.values(heroTable), 'rarity')) // 将式神数据按位阶分组
@@ -57,8 +63,9 @@ export default {
     };
   },
   methods: {
-    onChange(value, selectedOptions) {
-      console.log(value, selectedOptions);
+    onChange(values, selectedOptions) {
+      const value = Array.from(values).pop();
+      this.$emit("change", value); // 向上抛出事件
     },
     filter(inputValue, path) {
       return path.some(option => option.label.toLowerCase().indexOf(inputValue.toLowerCase()) > -1);
