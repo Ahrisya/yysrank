@@ -1,6 +1,6 @@
-import rankTable from "../data/shishen_rank.json";
+import rankTable from "../../data/shishen_rank.json";
 import getTeamIcons from "../team-icons";
-import shishenTable from "../data/shishen.json";
+import shishenTable from "../../data/shishen.json";
 import getRankChange from "../rank-change";
 import {toPercent} from "../utils/numbers"
 

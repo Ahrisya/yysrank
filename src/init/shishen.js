@@ -1,5 +1,5 @@
 import globals from "../globals";
-import shishenTable from "../data/shishen.json"
+import shishenTable from "../../data/shishen.json"
 
 const initOptions = () => {
     var url = "json/shishen.json"

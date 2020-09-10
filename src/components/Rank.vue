@@ -45,7 +45,7 @@
 
 import {Vue} from "vue-property-decorator";
 import {Divider, Icon, PageHeader, Progress, Table} from "ant-design-vue";
-import rankTable from "../data/shishen_rank.json"
+import rankTable from "../../data/shishen_rank.json"
 import Hero from "./Hero";
 
 Vue.use(PageHeader)

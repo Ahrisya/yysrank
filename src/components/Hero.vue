@@ -9,7 +9,7 @@
 
 <script>
 
-import heroTable from "../data/shishen.json"
+import heroTable from "../../data/shishen.json"
 
 export default {
   name: "Hero",

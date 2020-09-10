@@ -97,7 +97,7 @@
 
 <script>
 import HeroSelect from "@/components/HeroSelect";
-import battleTable from "@/data/data.json"
+import battleTable from "@/../../data/data.json"
 import * as _ from "underscore";
 import isContained from "@/utils/arrays";
 import HeroIcon from "@/components/HeroIcon";

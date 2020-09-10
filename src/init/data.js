@@ -1,4 +1,4 @@
-import dataTable from "../data/data.json"
+import dataTable from "../../data/data.json"
 
 const initData = () => {
     window.data = dataTable
