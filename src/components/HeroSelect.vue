@@ -19,7 +19,7 @@
 
 <script type="ts">
 
-import heroTable from "@/../../data/shishen.json"
+import heroTable from "../../data/shishen.json"
 
 const mapper = {
   '2': 'N',

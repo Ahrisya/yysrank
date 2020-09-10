@@ -97,10 +97,10 @@
 
 <script>
 import HeroSelect from "@/components/HeroSelect";
-import battleTable from "@/../../data/data.json"
 import * as _ from "underscore";
 import isContained from "@/utils/arrays";
 import HeroIcon from "@/components/HeroIcon";
+import getReports from "@/components/battles";
 
 export default {
   name: "WinRate",
@@ -147,12 +147,7 @@ export default {
     console.log('updated');
   },
   methods: {
-    handleSearch(e) {
-      e.preventDefault();
-      console.log("!!");
-      this.handleSearch1(e);
-      this.showModal();
-    },
+
     showModal() {
       this.visible = true;
     },
@@ -169,87 +164,46 @@ export default {
       this.visible = false;
     },
 
-
-    handleSearch1(e) {
+    handleSearch(e) {
       e.preventDefault();
       // eslint-disable-next-line @typescript-eslint/camelcase
       const {this_ban, this_1, this_2, this_3, this_4, this_5, that_ban, that_1, that_2, that_3, that_4, that_5} = this.form.getFieldsValue();
       // eslint-disable-next-line @typescript-eslint/camelcase
       const banList = _.without([this_ban, that_ban], undefined)
-      console.log("list");
-      console.log(banList);
       // eslint-disable-next-line @typescript-eslint/camelcase
       const thisTeamList = _.without([this_1, this_2, this_3, this_4, this_5], undefined)
-      console.log("thisTeamList");
-      console.log(thisTeamList);
       // eslint-disable-next-line @typescript-eslint/camelcase
       const thatTeamList = _.without([that_1, that_2, that_3, that_4, that_5], undefined)
-      console.log("thatTeamList");
-      console.log(thatTeamList);
 
+      // 己方阵容不能为空
       if (_.isEmpty(thisTeamList)) {
-        console.log("己方阵容不能为空");
         this.$notification['error']({
           message: '己方阵容不能为空',
           description:
               'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
         });
+        return;
       }
-      if (!_.isEmpty(banList) &&
-          !_.isEmpty(_.intersection(banList, _.union(thisTeamList, thatTeamList)))
-      ) {
-        console.log("Ban位冲突");
+      // Ban位冲突
+      if (!_.isEmpty(banList) && (isContained(banList, thisTeamList) || isContained(banList, thatTeamList))) {
         this.$notification['error']({
           message: 'Ban位冲突',
           description:
               'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
         });
+        return;
       }
-
-      // let reports = {};
-      const results = battleTable.data
-          .filter(battle => _.isEmpty(banList) || !(isContained(banList, battle.w) || isContained(banList, battle.l))) // 首先排除ban选的式神
-          .filter(battle => !_.isEqual(battle.w, battle.l)) // 排除胜负双方阵容一致的
-          .filter(battle => _.isEmpty(thisTeamList) || isContained(thisTeamList, battle.w) || isContained(thisTeamList, battle.l)) // 只看自己场的式神
-          .filter(battle => _.isEmpty(thatTeamList) || isContained(thatTeamList, battle.w) || isContained(thatTeamList, battle.l)) // 只看对方场的式神
-          .map(battle => {
-            const reports = {}
-            if (isContained(thisTeamList, battle.w) && isContained(thatTeamList, battle.l) && (isContained(thisTeamList, thatTeamList) || !isContained(thisTeamList, battle.l))) {
-              const key = [battle.w.sort(), battle.l.sort()].flat().join('_')
-              reports[key] = { // 计算胜场
-                s: 1,
-                w: 1,
-                l: 0,
-              }
-            }
-            if (isContained(thisTeamList, battle.l) && isContained(thatTeamList, battle.w) && (isContained(thisTeamList, thatTeamList) || !isContained(thisTeamList, battle.w))) {
-              const key = [battle.l.sort(), battle.w.sort()].flat().join('_')
-              reports[key] = { // 计算负场
-                s: 1,
-                w: 0,
-                l: 1,
-              }
-            }
-            return reports
-          }).reduce((prev, next) => {
-            for (const key of Object.keys(next)) {
-              if (/^\d{2,3}(_\d{2,3}){9}$/.test(key)) {
-                const value = prev[key] || {s: 0, w: 0, l: 0};
-                value.key = key;
-                const teams = _.chunk(key.split('_'), 5);
-                value.thisTeam = _.first(teams);
-                value.thatTeam = _.last(teams);
-                value.s = value.s + next[key].s;
-                value.w = value.w + next[key].w;
-                value.l = value.l + next[key].l;
-                prev[key] = value;
-              }
-            }
-            return prev;
-          })
-      // console.log(reports);
-      this.data = Object.values(results);
-      // console.log(Object.values(results));
+      const reports = getReports(banList, thisTeamList, thatTeamList); // 核心逻辑
+      this.data = reports;
+      if (_.isEmpty(reports)) {
+        this.$notification['error']({
+          message: '数据为空',
+          description:
+              'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+        });
+        return;
+      }
+      this.showModal();
     },
 
     handleReset() {
