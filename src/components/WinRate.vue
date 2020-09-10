@@ -86,6 +86,12 @@
       </a-table>
 
     </a-modal>
+
+    <a-card title="历史数据" style="margin-top: 32px">
+      <a-table>
+
+      </a-table>
+    </a-card>
   </div>
 </template>
 
@@ -183,11 +189,21 @@ export default {
 
       if (_.isEmpty(thisTeamList)) {
         console.log("己方阵容不能为空");
+        this.$notification['error']({
+          message: '己方阵容不能为空',
+          description:
+              'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+        });
       }
       if (!_.isEmpty(banList) &&
           !_.isEmpty(_.intersection(banList, _.union(thisTeamList, thatTeamList)))
       ) {
         console.log("Ban位冲突");
+        this.$notification['error']({
+          message: 'Ban位冲突',
+          description:
+              'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+        });
       }
 
       // let reports = {};
