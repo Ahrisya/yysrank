@@ -20,6 +20,7 @@
 <script type="ts">
 
 import heroTable from "../../data/shishen.json"
+import pinyin from "@/utils/pinyin";
 
 const mapper = {
   '2': 'N',
@@ -68,7 +69,10 @@ export default {
       this.$emit("change", value); // 向上抛出事件
     },
     filter(inputValue, path) {
-      return path.some(option => option.label.toLowerCase().indexOf(inputValue.toLowerCase()) > -1);
+      return path.some(option => {
+        return option.label.toLowerCase().indexOf(inputValue.toLowerCase()) > -1 ||
+            pinyin(option.label.toLowerCase()).indexOf(inputValue.toLowerCase()) > -1;
+      });
     },
   },
 }

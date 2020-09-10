@@ -44,6 +44,7 @@
     "bootstrap-table": "^1.17.1",
     "core-js": "^3.6.5",
     "jquery": "^3.5.1",
+    "pinyin": "^2.9.1",
     "toastr": "^2.1.4",
     "underscore": "^1.11.0",
     "vue": "^2.6.12",
