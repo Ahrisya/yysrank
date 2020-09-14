@@ -11,7 +11,7 @@ import queryWinRate, {resetSSOption, resetTeams, selectShishen, showHistoryDetai
 import {getCookie, setCookie} from "./utils/cookies"
 import app from "./globals"
 
-var last_update_date = '0831'
+var last_update_date = '0914'
 
 function showUpdates() {
     if (getCookie("lastupdate") != last_update_date) {
