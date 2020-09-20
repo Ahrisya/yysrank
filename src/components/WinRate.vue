@@ -39,30 +39,30 @@
       </a-row>
     </a-form>
     <a-modal
-        width="80%"
-        title="查询结果"
         :visible="visible"
-        @ok="handleOk"
+        title="查询结果"
+        width="80%"
         @cancel="handleCancel"
+        @ok="handleOk"
     >
       <a-table :data-source="data">
         <a-table-column title="我方阵容">
           <template v-slot="{thisTeam}">
-            <HeroIcon :id="Number.parseInt(team)" v-for="(team,index) in thisTeam" :key="index"
+            <HeroIcon v-for="(team,index) in thisTeam" :id="Number.parseInt(team)" :key="index"
                       style="margin: 4px"/>
           </template>
         </a-table-column>
         <a-table-column title="对方阵容">
           <template v-slot="{thatTeam}">
-            <HeroIcon :id="Number.parseInt(team)" v-for="(team,index) in thatTeam" :key="index"
+            <HeroIcon v-for="(team,index) in thatTeam" :id="Number.parseInt(team)" :key="index"
                       style="margin: 4px"/>
           </template>
         </a-table-column>
-        <a-table-column title="胜场" dataIndex="w" :sorter="(a,b) => a.w - b.w">
+        <a-table-column :sorter="(a,b) => a.w - b.w" dataIndex="w" title="胜场">
         </a-table-column>
-        <a-table-column title="总场次" dataIndex="s" :sorter="(a,b) => a.s - b.s">
+        <a-table-column :sorter="(a,b) => a.s - b.s" dataIndex="s" title="总场次">
         </a-table-column>
-        <a-table-column title="胜率" :sorter="(a,b) => a.w/a.s - b.w/b.s">
+        <a-table-column :sorter="(a,b) => a.w/a.s - b.w/b.s" title="胜率">
           <template v-slot="{w,s}">
             {{ (100 * w / s).toFixed(2) }} %
           </template>
@@ -70,7 +70,7 @@
       </a-table>
     </a-modal>
 
-    <a-card title="历史数据" style="margin-top: 32px">
+    <a-card style="margin-top: 32px" title="历史数据">
       <a-table :data-source="histories">
         <a-table-column title="#">
           <template slot-scope="{index}">
@@ -79,25 +79,25 @@
         </a-table-column>
         <a-table-column title="Ban">
           <template v-slot="{banList}">
-            <HeroIcon :id="Number.parseInt(team)" v-for="(team,index) in banList" :key="index"
+            <HeroIcon v-for="(team,index) in banList" :id="Number.parseInt(team)" :key="index"
                       style="margin: 4px"/>
           </template>
         </a-table-column>
         <a-table-column title="我方阵容">
           <template v-slot="{thisTeamList}">
-            <HeroIcon :id="Number.parseInt(team)" v-for="(team,index) in thisTeamList" :key="index"
+            <HeroIcon v-for="(team,index) in thisTeamList" :id="Number.parseInt(team)" :key="index"
                       style="margin: 4px"/>
           </template>
         </a-table-column>
         <a-table-column title="对方阵容">
           <template v-slot="{thatTeamList}">
-            <HeroIcon :id="Number.parseInt(team)" v-for="(team,index) in thatTeamList" :key="index"
+            <HeroIcon v-for="(team,index) in thatTeamList" :id="Number.parseInt(team)" :key="index"
                       style="margin: 4px"/>
           </template>
         </a-table-column>
-        <a-table-column title="获胜场次" dataIndex="w">
+        <a-table-column dataIndex="w" title="获胜场次">
         </a-table-column>
-        <a-table-column title="总场次" dataIndex="s">
+        <a-table-column dataIndex="s" title="总场次">
         </a-table-column>
         <a-table-column title="胜率">
           <template v-slot="{w,s}">

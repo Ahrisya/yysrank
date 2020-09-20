@@ -12,7 +12,14 @@ const reports = (banList, thisTeamList, thatTeamList) => {
         .filter(battle => _.isEmpty(thatTeamList) || isContained(thatTeamList, battle.w) || isContained(thatTeamList, battle.l)) // 只看对方场的式神
         .map(battle => {
             const reports = {}
-            if (isContained(thisTeamList, battle.w) && isContained(thatTeamList, battle.l) && (isContained(thisTeamList, thatTeamList) || !isContained(thisTeamList, battle.l))) {
+            if (
+                isContained(thisTeamList, battle.w) &&
+                isContained(thatTeamList, battle.l) &&
+                (
+                    isContained(thisTeamList, thatTeamList) ||
+                    !isContained(thisTeamList, battle.l)
+                )
+            ) {
                 const key = [battle.w.sort(), battle.l.sort()].flat().join('_')
                 reports[key] = { // 计算胜场
                     s: 1,
@@ -20,7 +27,14 @@ const reports = (banList, thisTeamList, thatTeamList) => {
                     l: 0,
                 }
             }
-            if (isContained(thisTeamList, battle.l) && isContained(thatTeamList, battle.w) && (isContained(thisTeamList, thatTeamList) || !isContained(thisTeamList, battle.w))) {
+            if (
+                isContained(thisTeamList, battle.l) &&
+                isContained(thatTeamList, battle.w) &&
+                (
+                    isContained(thisTeamList, thatTeamList) ||
+                    !isContained(thisTeamList, battle.w)
+                )
+            ) {
                 const key = [battle.l.sort(), battle.w.sort()].flat().join('_')
                 reports[key] = { // 计算负场
                     s: 1,

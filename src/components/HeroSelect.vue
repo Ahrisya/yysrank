@@ -1,9 +1,9 @@
 <template>
   <a-cascader
-      size="large"
       :options="options"
-      :show-search="{ filter }"
       :placeholder="placeholder"
+      :show-search="{ filter }"
+      size="large"
       @change="onChange"
   >
     <template slot="displayRender" slot-scope="{ labels, selectedOptions }">
