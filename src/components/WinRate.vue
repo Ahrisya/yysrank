@@ -1,5 +1,5 @@
 <template>
-  <div id="components-form-demo-advanced-search">
+  <div>
     <a-form :form="form" layout="horizontal" @submit="handleSearch">
       <!-- ban 位 -->
       <a-row>
@@ -32,6 +32,9 @@
           <a-button html-type="submit" type="primary">
             Search
           </a-button>
+          <a-button :style="{ marginLeft: '8px' }" @click="handleReset">
+            Reset
+          </a-button>
         </a-col>
       </a-row>
     </a-form>
@@ -39,7 +42,6 @@
         width="80%"
         title="查询结果"
         :visible="visible"
-        :confirm-loading="confirmLoading"
         @ok="handleOk"
         @cancel="handleCancel"
     >
@@ -56,40 +58,59 @@
                       style="margin: 4px"/>
           </template>
         </a-table-column>
-        <a-table-column title="胜场" colSpan="1" dataIndex="w" :sorter="(a,b) => a.w - b.w">
+        <a-table-column title="胜场" dataIndex="w" :sorter="(a,b) => a.w - b.w">
         </a-table-column>
-        <a-table-column title="总场次" colSpan="1" dataIndex="s" :sorter="(a,b) => a.s - b.s">
+        <a-table-column title="总场次" dataIndex="s" :sorter="(a,b) => a.s - b.s">
         </a-table-column>
-        <a-table-column title="胜率" colSpan="1">
+        <a-table-column title="胜率" :sorter="(a,b) => a.w/a.s - b.w/b.s">
           <template v-slot="{w,s}">
             {{ (100 * w / s).toFixed(2) }} %
           </template>
         </a-table-column>
-        <a slot="name" slot-scope="text">{{ text }}</a>
-        <span slot="customTitle"><a-icon type="smile-o"/> Name</span>
-        <span slot="tags" slot-scope="tags">
-      <a-tag
-          v-for="tag in tags"
-          :key="tag"
-          :color="tag === 'loser' ? 'volcano' : tag.length > 5 ? 'geekblue' : 'green'"
-      >
-        {{ tag.toUpperCase() }}
-      </a-tag>
-    </span>
-        <span slot="action" slot-scope="text, record">
-      <a>Invite 一 {{ record.name }}</a>
-      <a-divider type="vertical"/>
-      <a>Delete</a>
-      <a-divider type="vertical"/>
-      <a class="ant-dropdown-link"> More actions <a-icon type="down"/> </a>
-    </span>
       </a-table>
-
     </a-modal>
 
     <a-card title="历史数据" style="margin-top: 32px">
-      <a-table>
-
+      <a-table :data-source="histories">
+        <a-table-column title="#">
+          <template slot-scope="{index}">
+            {{ index }}
+          </template>
+        </a-table-column>
+        <a-table-column title="Ban">
+          <template v-slot="{banList}">
+            <HeroIcon :id="Number.parseInt(team)" v-for="(team,index) in banList" :key="index"
+                      style="margin: 4px"/>
+          </template>
+        </a-table-column>
+        <a-table-column title="我方阵容">
+          <template v-slot="{thisTeamList}">
+            <HeroIcon :id="Number.parseInt(team)" v-for="(team,index) in thisTeamList" :key="index"
+                      style="margin: 4px"/>
+          </template>
+        </a-table-column>
+        <a-table-column title="对方阵容">
+          <template v-slot="{thatTeamList}">
+            <HeroIcon :id="Number.parseInt(team)" v-for="(team,index) in thatTeamList" :key="index"
+                      style="margin: 4px"/>
+          </template>
+        </a-table-column>
+        <a-table-column title="获胜场次" dataIndex="w">
+        </a-table-column>
+        <a-table-column title="总场次" dataIndex="s">
+        </a-table-column>
+        <a-table-column title="胜率">
+          <template v-slot="{w,s}">
+            {{ (100 * w / s).toFixed(2) }} %
+          </template>
+        </a-table-column>
+        <a-table-column title="更多">
+          <template slot-scope="record">
+            <a-button type="link" @click="() => showHistory(record.key)">
+              <a-icon type="small-dash"/>
+            </a-button>
+          </template>
+        </a-table-column>
       </a-table>
     </a-card>
   </div>
@@ -106,64 +127,27 @@ export default {
   name: "WinRate",
   components: {HeroIcon, HeroSelect},
   props: ['title'],
-  // data() {
-  //   return {
-  //     formLayout: 'horizontal',
-  //     form: this.$form.createForm(this, {name: 'coordinated'}),
-  //   };
-  // },
-  // methods: {
-  //   handleSubmit(e) {
-  //     e.preventDefault();
-  //     this.form.validateFields((err, values) => {
-  //       if (!err) {
-  //         console.log('Received values of form: ', values);
-  //       }
-  //     });
-  //   },
-  //   handleSelectChange(value) {
-  //     console.log(value);
-  //     this.form.setFieldsValue({
-  //       note: `Hi, ${value === 'male' ? 'man' : 'lady'}!`,
-  //     });
-  //   },
-  // },
   data() {
     return {
-      expand: false,
       form: this.$form.createForm(this, {name: 'advanced_search'}),
-      ModalText: 'Content of the modal',
       visible: false,
-      confirmLoading: false,
-      data: {},
+      data: [],
+      histories: [],
     };
   },
-  computed: {
-    count() {
-      return this.expand ? 11 : 7;
-    },
-  },
-  updated() {
-    console.log('updated');
-  },
   methods: {
-
     showModal() {
       this.visible = true;
     },
     handleOk() {
-      this.ModalText = 'The modal will be closed after two seconds';
-      this.confirmLoading = true;
-      setTimeout(() => {
-        this.visible = false;
-        this.confirmLoading = false;
-      }, 2000);
-    },
-    handleCancel() {
-      console.log('Clicked cancel button');
       this.visible = false;
     },
-
+    handleCancel() {
+      this.visible = false;
+    },
+    handleReset() {
+      this.form.resetFields();
+    },
     handleSearch(e) {
       e.preventDefault();
       // eslint-disable-next-line @typescript-eslint/camelcase
@@ -179,8 +163,8 @@ export default {
       if (_.isEmpty(thisTeamList)) {
         this.$notification['error']({
           message: '己方阵容不能为空',
-          description:
-              'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+          // description:
+          //     'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
         });
         return;
       }
@@ -188,8 +172,8 @@ export default {
       if (!_.isEmpty(banList) && (isContained(banList, thisTeamList) || isContained(banList, thatTeamList))) {
         this.$notification['error']({
           message: 'Ban位冲突',
-          description:
-              'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+          // description:
+          //     'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
         });
         return;
       }
@@ -198,21 +182,45 @@ export default {
       if (_.isEmpty(reports)) {
         this.$notification['error']({
           message: '数据为空',
-          description:
-              'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+          // description:
+          //     'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
         });
         return;
+      }
+      const report = reports.map(report => {
+        const {w, s} = report;
+        return {w, s};
+      }).reduce((prev, next) => {
+        prev.w += next.w;
+        prev.s += next.s;
+        return prev;
+      });
+
+      const historyKey = [banList.join('_'), thisTeamList.join('_'), thatTeamList.join('_')].join('|');
+
+      if (this.histories.find(history => history.key === historyKey) === undefined) {
+        this.histories.push(
+            {
+              key: historyKey,
+              banList,
+              thisTeamList,
+              thatTeamList,
+              w: report.w,
+              s: report.s,
+              data: reports,
+            }
+        )
+        this.histories = this.histories.map((history, index) => ({...history, index: index + 1}))
       }
       this.showModal();
     },
 
-    handleReset() {
-      this.form.resetFields();
+    showHistory(key) {
+      const history = this.histories.find(history => history.key === key);
+      this.data = history.data;
+      this.showModal();
     },
 
-    toggle() {
-      this.expand = !this.expand;
-    },
   },
 }
 </script>
