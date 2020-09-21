@@ -75,7 +75,7 @@
           </li>
         </ul>
       </a-collapse-panel>
-      <a-collapse-panel key="4" header="Acknowledgement">
+      <a-collapse-panel key="5" header="Acknowledgement">
         <ul>
           <li>
             感谢<a href="https://undancer.com/">@米粒</a>的代码与结构优化。
