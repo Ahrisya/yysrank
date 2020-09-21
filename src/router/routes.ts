@@ -1,3 +1,6 @@
+// @ts-ignore
+import config from "@/config";
+
 const WinRate = () => import("@/components/WinRate.vue");
 const Rank = () => import("@/components/Rank.vue");
 const Recommend = () => import("@/components/Recommend.vue");
@@ -10,7 +13,7 @@ const routes = [
         component: WinRate,
         meta: {
             title: '',
-            subTitle: '数据来源于各服前百名斗技记录，每周一 12:00 ~ 14:00 更新，上次更新：09/07/2020'
+            subTitle: '数据来源于各服前百名斗技记录，每周一 12:00 ~ 14:00 更新，上次更新：' + config.update
         }
     },
     {
@@ -18,7 +21,7 @@ const routes = [
         component: Rank,
         meta: {
             title: '式神外战每周胜率榜',
-            subTitle: '数据来源于各服前百名斗技记录，仅列出场次大于100的式神, 上次更新：08/31/2020'
+            subTitle: '数据来源于各服前百名斗技记录，仅列出场次大于100的式神, 上次更新：' + config.update
         }
     },
     {
