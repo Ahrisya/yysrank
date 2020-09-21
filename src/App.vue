@@ -8,14 +8,12 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import HelloWorld from './components/HelloWorld.vue';
 import Layout from "@/components/Layout.vue";
 import 'ant-design-vue/dist/antd.css'; // or 'ant-design-vue/dist/antd.less'
 
 @Component({
   components: {
     Layout,
-    HelloWorld,
   },
 })
 export default class App extends Vue {

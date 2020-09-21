@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isContained = (left: any[], right: any[]) => {
     let leftIndex = 0, rightIndex = 0;
     left = left.sort(), right = right.sort();

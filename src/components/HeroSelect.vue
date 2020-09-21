@@ -64,7 +64,7 @@ export default {
     };
   },
   methods: {
-    onChange(values, selectedOptions) {
+    onChange(values) {
       const value = Array.from(values).pop();
       this.$emit("change", value); // 向上抛出事件
     },
