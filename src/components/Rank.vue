@@ -1,8 +1,8 @@
 <template>
   <div>
     <a-table :data-source="data" :pagination="{ pageSize:30 }">
-      <a-table-column key="index" data-index="index" title="#"/>
-      <a-table-column key="point">
+      <a-table-column key="index" data-index="index" title="#" width="100px"/>
+      <a-table-column key="point" width="64px">
         <template v-slot="{point}">
           <p v-if="(typeof point) === 'string'" :style="{color: '#007bff'}">
             {{ point }}
@@ -21,22 +21,22 @@
           </p>
         </template>
       </a-table-column>
-      <a-table-column key="id" title="式神">
+      <a-table-column key="id" title="式神" width="10">
         <template v-slot="{id}">
           <Hero :id="id"/>
         </template>
       </a-table-column>
-      <a-table-column key="win_rate" title="外战胜率">
+      <a-table-column key="win_rate" title="外战胜率" width="200px">
         <template v-slot="{win_rate}">
           <a-progress :format="percent => `${percent.toFixed(2)} %`" :percent="win_rate"/>
         </template>
       </a-table-column>
-      <a-table-column key="use_rate" title="选用率">
+      <a-table-column key="use_rate" title="选用率" width="200px">
         <template v-slot="{use_rate}">
           <a-progress :format="percent => `${percent.toFixed(2)} %`" :percent="use_rate*100"/>
         </template>
       </a-table-column>
-      <a-table-column key="count" data-index="count" title="外战次数"/>
+      <a-table-column key="count" data-index="count" title="外战次数" width="100px"/>
     </a-table>
   </div>
 </template>

@@ -32,9 +32,9 @@
           <a-button html-type="submit" type="primary">
             Search
           </a-button>
-          <a-button :style="{ marginLeft: '8px' }" @click="handleReset">
-            Reset
-          </a-button>
+          <!--          <a-button :style="{ marginLeft: '8px' }" @click="handleReset">-->
+          <!--            Reset-->
+          <!--          </a-button>-->
         </a-col>
       </a-row>
     </a-form>
@@ -46,7 +46,7 @@
         @ok="handleOk"
     >
       <a-table :data-source="data">
-        <a-table-column title="我方阵容">
+        <a-table-column title="我方阵容" width="10">
           <template v-slot="{thisTeam}">
             <HeroIcon v-for="(team,index) in thisTeam" :id="Number.parseInt(team)" :key="index"
                       style="margin: 4px"/>
@@ -72,39 +72,39 @@
 
     <a-card style="margin-top: 32px" title="历史数据">
       <a-table :data-source="histories">
-        <a-table-column title="#">
+        <a-table-column title="#" width="32px">
           <template slot-scope="{index}">
             {{ index }}
           </template>
         </a-table-column>
-        <a-table-column title="Ban">
+        <a-table-column title="Ban" width="120px">
           <template v-slot="{banList}">
             <HeroIcon v-for="(team,index) in banList" :id="Number.parseInt(team)" :key="index"
                       style="margin: 4px"/>
           </template>
         </a-table-column>
-        <a-table-column title="我方阵容">
+        <a-table-column title="我方阵容" width="240px">
           <template v-slot="{thisTeamList}">
             <HeroIcon v-for="(team,index) in thisTeamList" :id="Number.parseInt(team)" :key="index"
                       style="margin: 4px"/>
           </template>
         </a-table-column>
-        <a-table-column title="对方阵容">
+        <a-table-column title="对方阵容" width="240px">
           <template v-slot="{thatTeamList}">
             <HeroIcon v-for="(team,index) in thatTeamList" :id="Number.parseInt(team)" :key="index"
                       style="margin: 4px"/>
           </template>
         </a-table-column>
-        <a-table-column dataIndex="w" title="获胜场次">
+        <a-table-column dataIndex="w" title="获胜场次" width="64px">
         </a-table-column>
-        <a-table-column dataIndex="s" title="总场次">
+        <a-table-column dataIndex="s" title="总场次" width="64px">
         </a-table-column>
-        <a-table-column title="胜率">
+        <a-table-column title="胜率" width="64px">
           <template v-slot="{w,s}">
             {{ (100 * w / s).toFixed(2) }} %
           </template>
         </a-table-column>
-        <a-table-column title="更多">
+        <a-table-column title="更多" width="24px">
           <template slot-scope="record">
             <a-button type="link" @click="() => showHistory(record.key)">
               <a-icon type="small-dash"/>
