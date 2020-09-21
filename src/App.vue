@@ -19,6 +19,18 @@ import 'ant-design-vue/dist/antd.css'; // or 'ant-design-vue/dist/antd.less'
   },
 })
 export default class App extends Vue {
+  data() {
+    return {
+      metaInfo: {
+        title: 'My Example App',
+        titleTemplate: '%s - Yay!',
+        htmlAttrs: {
+          lang: 'en',
+          amp: true
+        }
+      }
+    }
+  }
 }
 </script>
 

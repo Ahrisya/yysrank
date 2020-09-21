@@ -6,7 +6,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "analyz": "NODE_ENV=production npm_config_report=true npm run build"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,7 @@
     "svg-transform-loader": "^2.0.13",
     "typescript": "~3.9.3",
     "vue-template-compiler": "^2.6.11",
+    "webpack-bundle-analyzer": "^3.9.0",
     "webpack-cdn-plugin": "^3.3.1",
     "webpack-cli": "^3.3.12"
   },
@@ -49,6 +51,7 @@
     "underscore": "^1.11.0",
     "vue": "^2.6.12",
     "vue-class-component": "^7.2.5",
+    "vue-meta": "^2.4.0",
     "vue-property-decorator": "^9.0.0",
     "vue-router": "^3.4.3"
   }
