@@ -89,6 +89,11 @@ Vue.use(PageHeader)
 
 export default {
   name: "Tutorial",
+  data() {
+    return {
+      activeKey: '',
+    }
+  }
 };
 </script>
 

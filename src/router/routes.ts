@@ -1,4 +1,3 @@
-// @ts-ignore
 import config from "@/config";
 
 const WinRate = () => import("@/components/WinRate.vue");

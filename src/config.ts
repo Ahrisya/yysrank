@@ -1,4 +1,5 @@
 interface Config {
+    // eslint-disable-next-line @typescript-eslint/member-delimiter-style
     update: string,
 }
 

@@ -142,6 +142,11 @@ Vue.use(PageHeader)
 
 export default {
   name: "MoreTools",
+  data() {
+    return {
+      activeKey: '',
+    }
+  }
 };
 </script>
 
