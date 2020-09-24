@@ -48,13 +48,13 @@
       <a-table :data-source="data">
         <a-table-column title="我方阵容">
           <template v-slot="{thisTeam}">
-            <HeroIcon v-for="(team,index) in thisTeam" :id="Number.parseInt(team)" :key="index"
+            <HeroIcon v-for="(team,index) in thisTeam" :id="team" :key="index"
                       style="margin: 4px"/>
           </template>
         </a-table-column>
         <a-table-column title="对方阵容">
           <template v-slot="{thatTeam}">
-            <HeroIcon v-for="(team,index) in thatTeam" :id="Number.parseInt(team)" :key="index"
+            <HeroIcon v-for="(team,index) in thatTeam" :id="team" :key="index"
                       style="margin: 4px"/>
           </template>
         </a-table-column>
@@ -79,19 +79,19 @@
         </a-table-column>
         <a-table-column title="Ban" width="120px">
           <template v-slot="{banList}">
-            <HeroIcon v-for="(team,index) in banList" :id="Number.parseInt(team)" :key="index"
+            <HeroIcon v-for="(team,index) in banList" :id="team" :key="index"
                       style="margin: 4px"/>
           </template>
         </a-table-column>
         <a-table-column title="我方阵容" width="240px">
           <template v-slot="{thisTeamList}">
-            <HeroIcon v-for="(team,index) in thisTeamList" :id="Number.parseInt(team)" :key="index"
+            <HeroIcon v-for="(team,index) in thisTeamList" :id="team" :key="index"
                       style="margin: 4px"/>
           </template>
         </a-table-column>
         <a-table-column title="对方阵容" width="240px">
           <template v-slot="{thatTeamList}">
-            <HeroIcon v-for="(team,index) in thatTeamList" :id="Number.parseInt(team)" :key="index"
+            <HeroIcon v-for="(team,index) in thatTeamList" :id="team" :key="index"
                       style="margin: 4px"/>
           </template>
         </a-table-column>
