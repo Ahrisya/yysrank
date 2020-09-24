@@ -46,7 +46,7 @@
         @ok="handleOk"
     >
       <a-table :data-source="data">
-        <a-table-column title="我方阵容" width="10">
+        <a-table-column title="我方阵容">
           <template v-slot="{thisTeam}">
             <HeroIcon v-for="(team,index) in thisTeam" :id="Number.parseInt(team)" :key="index"
                       style="margin: 4px"/>
@@ -163,17 +163,19 @@ export default {
       if (_.isEmpty(thisTeamList)) {
         this.$notification['error']({
           message: '己方阵容不能为空',
-          // description:
-          //     'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
         });
         return;
       }
       // Ban位冲突
-      if (!_.isEmpty(banList) && (isContained(banList, thisTeamList) || isContained(banList, thatTeamList))) {
+      if (
+          !_.isEmpty(banList) &&
+          (
+              isContained(banList, thisTeamList) ||
+              isContained(banList, thatTeamList)
+          )
+      ) {
         this.$notification['error']({
           message: 'Ban位冲突',
-          // description:
-          //     'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
         });
         return;
       }
@@ -182,8 +184,6 @@ export default {
       if (_.isEmpty(reports)) {
         this.$notification['error']({
           message: '数据为空',
-          // description:
-          //     'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
         });
         return;
       }
