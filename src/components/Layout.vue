@@ -81,7 +81,7 @@ export default {
         content: h('div', {}, [
           h('h3', config.update),
           h('ul', {}, [
-            h('li', '数据更新：更新了09/07-09/13式神排行榜及' + battleTable.data.length + '场斗技数据。')
+            h('li', '数据更新：更新了' + config.range + '式神排行榜及' + battleTable.data.length + '场斗技数据。')
           ]),
         ]),
         onOk: handleOk,
