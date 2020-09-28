@@ -6,7 +6,7 @@ interface Config {
 }
 
 const config: Config = {
-    update: '09/21/2020',
-    range: '09/14-09/21',
+    update: '09/28/2020',
+    range: '09/21-09/27',
 }
 export default config;

@@ -1591,36 +1591,6 @@
           "icon_transparent": "https://ok.166.net/gameyw-misc/opd/squash/20200415/113446-iv1lbgneky.png",
           "icon_with_name": "https://ok.166.net/gameyw-misc/opd/squash/20200415/113446-iv1lbgneky.png"
      },
-     "349": {
-          "id": 349,
-          "name": "风狸",
-          "rarity": 4,
-          "icon": "https://ok.166.net/gameyw-misc/opd/squash/20200515/164826-nau96d74zv.jpg"
-     },
-     "350": {
-          "id": 350,
-          "name": "蝎女",
-          "rarity": 4,
-          "icon": "https://ok.166.net/gameyw-misc/opd/squash/20200625/151747-0sd3akqv6f.jpg"
-     },
-     "351": {
-          "id": 351,
-          "name": "铃鹿御前",
-          "rarity": 5,
-          "icon": "https://ok.166.net/gameyw-misc/opd/squash/20200521/165144-4sdhawru3o.jpg"
-     },
-     "352": {
-          "id": 352,
-          "name": "缚骨清姬",
-          "rarity": 6,
-          "icon": "https://ok.166.net/gameyw-misc/opd/squash/20200625/151746-dgumwsvk2y.jpg"
-     },
-     "353": {
-          "id": 353,
-          "name": "紧那罗",
-          "rarity": 5,
-          "icon": "https://ok.166.net/gameyw-misc/opd/squash/20200730/110223-f0evutzl3j.jpg"
-     },
      "400": {
           "id": 400,
           "name": "盗墓小鬼",
@@ -1724,25 +1694,45 @@
           "id": 410,
           "name": "招福达摩",
           "rarity": 2,
-          "icon": "https://ok.166.net/gameyw-misc/opd/squash/yys/painting/410.png"
+          "painting": "https://ok.166.net/gameyw-misc/opd/squash/yys/painting/410.png",
+          "painting_cut": "https://ok.166.net/gameyw-misc/opd/squash/yys/painting/410.png",
+          "painting_cut_awake": "https://ok.166.net/gameyw-misc/opd/squash/yys/painting/410.png",
+          "icon": "https://ok.166.net/gameyw-misc/opd/squash/yys/icon/410.jpg",
+          "icon_transparent": "https://ok.166.net/gameyw-misc/opd/squash/yys/icon_transparent/410.png",
+          "icon_with_name": "https://ok.166.net/gameyw-misc/opd/squash/yys/icon_with_name/410.png"
      },
      "411": {
           "id": 411,
           "name": "御行达摩",
           "rarity": 2,
-          "icon": "https://ok.166.net/gameyw-misc/opd/squash/yys/painting/411.png"
+          "painting": "https://ok.166.net/gameyw-misc/opd/squash/yys/painting/411.png",
+          "painting_cut": "https://ok.166.net/gameyw-misc/opd/squash/yys/painting/411.png",
+          "painting_cut_awake": "https://ok.166.net/gameyw-misc/opd/squash/yys/painting/411.png",
+          "icon": "https://ok.166.net/gameyw-misc/opd/squash/yys/icon/411.jpg",
+          "icon_transparent": "https://ok.166.net/gameyw-misc/opd/squash/yys/icon_transparent/411.png",
+          "icon_with_name": "https://ok.166.net/gameyw-misc/opd/squash/yys/icon_with_name/411.png"
      },
      "412": {
           "id": 412,
           "name": "奉为达摩",
           "rarity": 2,
-          "icon": "https://ok.166.net/gameyw-misc/opd/squash/yys/painting/412.png"
+          "painting": "https://ok.166.net/gameyw-misc/opd/squash/yys/painting/412.png",
+          "painting_cut": "https://ok.166.net/gameyw-misc/opd/squash/yys/painting/412.png",
+          "painting_cut_awake": "https://ok.166.net/gameyw-misc/opd/squash/yys/painting/412.png",
+          "icon": "https://ok.166.net/gameyw-misc/opd/squash/yys/icon/412.jpg",
+          "icon_transparent": "https://ok.166.net/gameyw-misc/opd/squash/yys/icon_transparent/412.png",
+          "icon_with_name": "https://ok.166.net/gameyw-misc/opd/squash/yys/icon_with_name/412.png"
      },
      "413": {
           "id": 413,
           "name": "大吉达摩",
           "rarity": 2,
-          "icon": "https://ok.166.net/gameyw-misc/opd/squash/yys/painting/413.png"
+          "painting": "https://ok.166.net/gameyw-misc/opd/squash/yys/painting/413.png",
+          "painting_cut": "https://ok.166.net/gameyw-misc/opd/squash/yys/painting/413.png",
+          "painting_cut_awake": "https://ok.166.net/gameyw-misc/opd/squash/yys/painting/413.png",
+          "icon": "https://ok.166.net/gameyw-misc/opd/squash/yys/icon/413.jpg",
+          "icon_transparent": "https://ok.166.net/gameyw-misc/opd/squash/yys/icon_transparent/413.png",
+          "icon_with_name": "https://ok.166.net/gameyw-misc/opd/squash/yys/icon_with_name/413.png"
      },
      "414": {
           "id": 414,
@@ -1887,6 +1877,17 @@
           "icon_transparent": "https://ok.166.net/gameyw-misc/opd/squash/yys/icon_transparent/426.png",
           "icon_with_name": "https://ok.166.net/gameyw-misc/opd/squash/yys/icon_with_name/426.png"
      },
+    "349": {
+          "id": 349,
+          "name": "风狸",
+          "rarity": 4,
+          "painting": "https://ok.166.net/gameyw-misc/opd/squash/20200515/174844-hpjocd5we7.png",
+          "painting_cut": "https://ok.166.net/gameyw-misc/opd/squash/20200515/173438-l12ybngm4p.png",
+          "painting_cut_awake": "https://ok.166.net/gameyw-misc/opd/squash/20200515/173436-23zdws5neb.png",
+          "icon": "https://ok.166.net/gameyw-misc/opd/squash/20200515/164826-nau96d74zv.jpg",
+          "icon_transparent": "https://ok.166.net/gameyw-misc/opd/squash/20200515/164702-uewam4rcot.png",
+          "icon_with_name": "https://ok.166.net/gameyw-misc/opd/squash/20200515/164702-uewam4rcot.png"
+     },
      "427": {
           "id": 427,
           "name": "彼岸花呱",
@@ -1897,5 +1898,71 @@
           "icon": "https://ok.166.net/gameyw-misc/opd/squash/yys/icon/427.jpg",
           "icon_transparent": "https://ok.166.net/gameyw-misc/opd/squash/yys/icon_transparent/427.png",
           "icon_with_name": "https://ok.166.net/gameyw-misc/opd/squash/yys/icon_with_name/427.png"
+     },
+    "351": {
+          "id": 351,
+          "name": "铃鹿御前",
+          "rarity": 5,
+          "painting": "https://ok.166.net/gameyw-misc/opd/squash/20200515/173447-z7m19w6sja.png",
+          "painting_cut": "https://ok.166.net/gameyw-misc/opd/squash/20200521/165143-8gb69vdt71.png",
+          "painting_cut_awake": "https://ok.166.net/gameyw-misc/opd/squash/20200521/165144-i0a835rjcq.png",
+          "icon": "https://ok.166.net/gameyw-misc/opd/squash/20200521/165144-4sdhawru3o.jpg",
+          "icon_transparent": "https://ok.166.net/gameyw-misc/opd/squash/20200515/164703-9nwp48vl5u.png",
+          "icon_with_name": "https://ok.166.net/gameyw-misc/opd/squash/20200515/164703-9nwp48vl5u.png"
+     },
+     "350": {
+          "id": 350,
+          "name": "蝎女",
+          "rarity": 4,
+          "painting": "https://ok.166.net/gameyw-misc/opd/squash/20200625/151745-omlujidney.png",
+          "painting_cut": "https://ok.166.net/gameyw-misc/opd/squash/20200625/151747-rqa8kuw37c.png",
+          "painting_cut_awake": "https://ok.166.net/gameyw-misc/opd/squash/20200625/151744-l283hidujw.png",
+          "icon": "https://ok.166.net/gameyw-misc/opd/squash/20200625/151747-0sd3akqv6f.jpg",
+          "icon_transparent": "https://ok.166.net/gameyw-misc/opd/squash/20200625/151746-qhm3st4oj7.png",
+          "icon_with_name": ""
+     },
+     "352": {
+          "id": 352,
+          "name": "缚骨清姬",
+          "rarity": 6,
+          "painting": "https://ok.166.net/gameyw-misc/opd/squash/20200625/151745-3qhzytoafr.png",
+          "painting_cut": "https://ok.166.net/gameyw-misc/opd/squash/20200625/151748-egry9wu5jb.png",
+          "painting_cut_awake": "https://ok.166.net/gameyw-misc/opd/squash/20200625/151748-egry9wu5jb.png",
+          "icon": "https://ok.166.net/gameyw-misc/opd/squash/20200625/151746-dgumwsvk2y.jpg",
+          "icon_transparent": "https://ok.166.net/gameyw-misc/opd/squash/20200625/151745-c2vln6ktsi.png",
+          "icon_with_name": ""
+     },
+     "353": {
+          "id": 353,
+          "name": "紧那罗",
+          "rarity": 5,
+          "painting": "https://ok.166.net/gameyw-misc/opd/squash/20200729/145719-74vfqsgse3.png",
+          "painting_cut": "https://ok.166.net/gameyw-misc/opd/squash/20200730/110548-t7odfpahg5.png",
+          "painting_cut_awake": "https://ok.166.net/gameyw-misc/opd/squash/20200730/110545-0c4zlys2ha.png",
+          "icon": "https://ok.166.net/gameyw-misc/opd/squash/20200730/110223-f0evutzl3j.jpg",
+          "icon_transparent": "https://ok.166.net/gameyw-misc/opd/squash/20200729/141219-lbg59v8f46.png",
+          "icon_with_name": ""
+     },
+     "354": {
+          "id": 354,
+          "name": "待宵姑获鸟",
+          "rarity": 6,
+          "painting": "https://ok.166.net/gameyw-misc/opd/squash/20200916/143305-1wsgzahy52.png",
+          "painting_cut": "https://ok.166.net/gameyw-misc/opd/squash/20200916/143305-1wsgzahy52.png",
+          "painting_cut_awake": "https://ok.166.net/gameyw-misc/opd/squash/20200916/143305-1wsgzahy52.png",
+          "icon": "https://ok.166.net/gameyw-misc/opd/squash/20200916/143304-dyuzhc6vsk.png",
+          "icon_transparent": "https://ok.166.net/gameyw-misc/opd/squash/20200916/143304-dyuzhc6vsk.png",
+          "icon_with_name": ""
+     },
+     "355": {
+          "id": 355,
+          "name": "麓铭大岳丸",
+          "rarity": 6,
+          "painting": "https://ok.166.net/gameyw-misc/opd/squash/20200923/103855-ie6rsl3kf8.png",
+          "painting_cut": "https://ok.166.net/gameyw-misc/opd/squash/20200923/103855-ie6rsl3kf8.png",
+          "painting_cut_awake": "https://ok.166.net/gameyw-misc/opd/squash/20200923/103855-ie6rsl3kf8.png",
+          "icon": "https://ok.166.net/gameyw-misc/opd/squash/20200916/143305-mcq2zd1j7y.png",
+          "icon_transparent": "https://ok.166.net/gameyw-misc/opd/squash/20200916/143305-mcq2zd1j7y.png",
+          "icon_with_name": ""
      }
 }
