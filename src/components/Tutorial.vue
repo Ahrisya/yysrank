@@ -20,7 +20,7 @@ export default {
   name: "Tutorial",
   data() {
     return {
-      activeKey: '',
+      activeKey: '0',
       tutorials,
     }
   }
