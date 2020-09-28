@@ -1,75 +1,47 @@
 <template>
-  <div>
-    <a-form :form="form" layout="horizontal" @submit="handleSearch">
-      <!-- ban 位 -->
-      <a-row>
-        <a-col :span="12">
-          <a-form-item :label-col="{ span: 4 }" :wrapper-col="{ span:8 }" label="我方ban位">
-            <HeroSelect v-decorator="[`this_ban`]" placeholder="请选择式神..."/>
-          </a-form-item>
-        </a-col>
-        <a-col :span="12">
-          <a-form-item :label-col="{ span: 4 }" :wrapper-col="{ span:8 }" label="敌方ban位">
-            <HeroSelect v-decorator="[`that_ban`]" placeholder="请选择式神..."/>
-          </a-form-item>
-        </a-col>
-      </a-row>
-      <!-- 五个可选位置 -->
-      <a-row v-for="i in 5" :key="i">
-        <a-col :span="12">
-          <a-form-item :label="`我方${i}号位`" :label-col="{ span: 4 }" :wrapper-col="{ span:8 }">
-            <HeroSelect v-decorator="[`this_${i}`]" placeholder="请选择式神..."/>
-          </a-form-item>
-        </a-col>
-        <a-col :span="12">
-          <a-form-item :label="`敌方${i}号位`" :label-col="{ span: 4 }" :wrapper-col="{ span:8 }">
-            <HeroSelect v-decorator="[`that_${i}`]" placeholder="请选择式神..."/>
-          </a-form-item>
-        </a-col>
-      </a-row>
-      <a-row>
-        <a-col :span="24" :style="{ textAlign: 'center' }">
-          <a-button html-type="submit" type="primary">
-            Search
-          </a-button>
-          <!--          <a-button :style="{ marginLeft: '8px' }" @click="handleReset">-->
-          <!--            Reset-->
-          <!--          </a-button>-->
-        </a-col>
-      </a-row>
-    </a-form>
-    <a-modal
-        :visible="visible"
-        title="查询结果"
-        width="80%"
-        @cancel="handleCancel"
-        @ok="handleOk"
-    >
-      <a-table :data-source="data">
-        <a-table-column title="我方阵容">
-          <template v-slot="{thisTeam}">
-            <HeroIcon v-for="(team,index) in thisTeam" :id="team" :key="index"
-                      style="margin: 4px"/>
-          </template>
-        </a-table-column>
-        <a-table-column title="对方阵容">
-          <template v-slot="{thatTeam}">
-            <HeroIcon v-for="(team,index) in thatTeam" :id="team" :key="index"
-                      style="margin: 4px"/>
-          </template>
-        </a-table-column>
-        <a-table-column :sorter="(a,b) => a.w - b.w" dataIndex="w" title="胜场">
-        </a-table-column>
-        <a-table-column :sorter="(a,b) => a.s - b.s" dataIndex="s" title="总场次">
-        </a-table-column>
-        <a-table-column :sorter="(a,b) => a.w/a.s - b.w/b.s" title="胜率">
-          <template v-slot="{w,s}">
-            {{ (100 * w / s).toFixed(2) }} %
-          </template>
-        </a-table-column>
-      </a-table>
-    </a-modal>
-
+  <a-space direction="vertical">
+    <a-card>
+      <a-form :form="form" @submit="handleSearch">
+        <a-row :gutter="[16,16]">
+          <a-col :span="12">
+            <a-card title="我方阵容" :bordered="false">
+              <!-- ban 位 -->
+              <a-form-item :label-col="{ span: 4 }" :wrapper-col="{ span:8 }" label="我方ban位">
+                <HeroSelect v-decorator="[`this_ban`]" placeholder="请选择式神..."/>
+              </a-form-item>
+              <!-- 五个可选位置 -->
+              <a-form-item v-for="i in 5" :key="i" :label="`我方${i}号位`" :label-col="{ span: 4 }"
+                           :wrapper-col="{ span:8 }">
+                <HeroSelect v-decorator="[`this_${i}`]" placeholder="请选择式神..."/>
+              </a-form-item>
+            </a-card>
+          </a-col>
+          <a-col :span="12">
+            <a-card title="对方阵容" :bordered="false">
+              <!-- ban 位 -->
+              <a-form-item :label-col="{ span: 4 }" :wrapper-col="{ span:8 }" label="敌方ban位">
+                <HeroSelect v-decorator="[`that_ban`]" placeholder="请选择式神..."/>
+              </a-form-item>
+              <!-- 五个可选位置 -->
+              <a-form-item v-for="i in 5" :key="i" :label="`敌方${i}号位`" :label-col="{ span: 4 }"
+                           :wrapper-col="{ span:8 }">
+                <HeroSelect v-decorator="[`that_${i}`]" placeholder="请选择式神..."/>
+              </a-form-item>
+            </a-card>
+          </a-col>
+        </a-row>
+        <a-row :gutter="[16,16]">
+          <a-col :span="24" :style="{  textAlign: 'center' }">
+            <a-button html-type="submit" type="primary">
+              搜索对战
+            </a-button>
+            <!--          <a-button :style="{ marginLeft: '8px' }" @click="handleReset">-->
+            <!--            Reset-->
+            <!--          </a-button>-->
+          </a-col>
+        </a-row>
+      </a-form>
+    </a-card>
     <a-card style="margin-top: 32px" title="历史数据">
       <a-table :data-source="histories">
         <a-table-column title="#" width="32px">
@@ -113,7 +85,38 @@
         </a-table-column>
       </a-table>
     </a-card>
-  </div>
+    <a-modal
+        :visible="visible"
+        title="查询结果"
+        width="80%"
+        @cancel="handleCancel"
+        @ok="handleOk"
+    >
+      <a-table :data-source="data">
+        <a-table-column title="我方阵容">
+          <template v-slot="{thisTeam}">
+            <HeroIcon v-for="(team,index) in thisTeam" :id="team" :key="index"
+                      style="margin: 4px"/>
+          </template>
+        </a-table-column>
+        <a-table-column title="对方阵容">
+          <template v-slot="{thatTeam}">
+            <HeroIcon v-for="(team,index) in thatTeam" :id="team" :key="index"
+                      style="margin: 4px"/>
+          </template>
+        </a-table-column>
+        <a-table-column :sorter="(a,b) => a.w - b.w" dataIndex="w" title="胜场">
+        </a-table-column>
+        <a-table-column :sorter="(a,b) => a.s - b.s" dataIndex="s" title="总场次">
+        </a-table-column>
+        <a-table-column :sorter="(a,b) => a.w/a.s - b.w/b.s" title="胜率">
+          <template v-slot="{w,s}">
+            {{ (100 * w / s).toFixed(2) }} %
+          </template>
+        </a-table-column>
+      </a-table>
+    </a-modal>
+  </a-space>
 </template>
 
 <script>
@@ -226,5 +229,7 @@ export default {
 </script>
 
 <style scoped>
-
+.ant-space {
+  display: block;
+}
 </style>
