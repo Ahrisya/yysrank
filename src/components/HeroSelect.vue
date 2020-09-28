@@ -19,8 +19,8 @@
 
 <script>
 
-import heroTable from "../../data/shishen.json"
 import pinyin from "@/utils/pinyin";
+import {HeroTable} from "@/data";
 
 const mapper = {
   '2': 'N',
@@ -47,6 +47,7 @@ export default {
     placeholder: String,
   },
   data() {
+    const heroTable = HeroTable();
     const options = Object
         .entries(groupBy(Object.values(heroTable), 'rarity')) // 将式神数据按位阶分组
         .map(([key, values]) => { // 将式神数据处理成下拉选择器所需要的格式

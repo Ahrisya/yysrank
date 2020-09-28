@@ -42,16 +42,18 @@
 </template>
 
 <script>
-import rankTable from "../../../../data/shishen_rank.json"
 import Hero from "../../../components/Hero";
+import {Component, Vue} from "vue-property-decorator";
+import {HeroRankTable} from "@/data";
 
-export default {
-  name: "Rank",
+@Component({
   components: {
-    Hero
+    Hero,
   },
+})
+export default class Rank extends Vue {
   data() {
-    const tables = Object.entries(rankTable).map(([, values]) => {
+    const tables = Object.entries(HeroRankTable()).map(([, values]) => {
       const row = {};
       const columns = ['index', 'point', 'id', 'win_rate', 'use_rate', 'count']
       values.forEach((value, index) => {
@@ -66,8 +68,8 @@ export default {
     return {
       data: tables,
     };
-  },
-};
+  }
+}
 </script>
 
 <style scoped>

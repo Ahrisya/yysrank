@@ -4,7 +4,7 @@
       <a-form :form="form" @submit="handleSearch">
         <a-row :gutter="[16,16]">
           <a-col :span="12">
-            <a-card title="我方阵容" :bordered="false">
+            <a-card :bordered="false" title="我方阵容">
               <!-- ban 位 -->
               <a-form-item :label-col="{ span: 4 }" :wrapper-col="{ span:8 }" label="我方ban位">
                 <HeroSelect v-decorator="[`this_ban`]" placeholder="请选择式神..."/>
@@ -17,7 +17,7 @@
             </a-card>
           </a-col>
           <a-col :span="12">
-            <a-card title="对方阵容" :bordered="false">
+            <a-card :bordered="false" title="对方阵容">
               <!-- ban 位 -->
               <a-form-item :label-col="{ span: 4 }" :wrapper-col="{ span:8 }" label="敌方ban位">
                 <HeroSelect v-decorator="[`that_ban`]" placeholder="请选择式神..."/>
@@ -125,12 +125,14 @@ import * as _ from "underscore";
 import isContained from "@/utils/arrays";
 import HeroIcon from "@/components/HeroIcon";
 import getReports from "../battles";
+import data from "@/data";
 
 export default {
   name: "WinRate",
   components: {HeroIcon, HeroSelect},
   props: ['title'],
   data() {
+    data();
     return {
       form: this.$form.createForm(this, {name: 'advanced_search'}),
       visible: false,

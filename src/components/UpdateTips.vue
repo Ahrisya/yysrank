@@ -5,7 +5,7 @@
 <script>
 import config from "@/config";
 import moment from "moment";
-import battleTable from "../../data/data.json";
+import {HeroBattleTable} from "@/data";
 
 export default {
   name: "UpdateTips",
@@ -19,6 +19,7 @@ export default {
     updateTips() {
       if (this.$cookies.get('last_updated') !== config.update) {
         const h = this.$createElement;
+        const length = HeroBattleTable().data.length
         this.$info({
           width: '36%',
           maskClosable: true,
@@ -26,7 +27,7 @@ export default {
           content: h('div', {}, [
             h('h3', config.update),
             h('ul', {}, [
-              h('li', '数据更新：更新了' + config.range + '式神排行榜及' + battleTable.data.length + '场斗技数据。')
+              h('li', `数据更新：更新了${config.range}式神排行榜及${length}场斗技数据。`)
             ]),
           ]),
           onOk: this.handleDone,
