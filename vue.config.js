@@ -11,6 +11,18 @@ module.exports = {
         //     .end()
 
         // scss 需要处理svg
+        const Mode = require('frontmatter-markdown-loader/mode')
+
+        config.module
+            .rule('markdown')
+            .test(/\.md$/)
+            .use('frontmatter-markdown-loader')
+            .loader('frontmatter-markdown-loader')
+        // .tap(options => {
+        //     return {
+        //         mode: [Mode.VUE_COMPONENT]
+        //     }
+        // })
 
         config.plugin('html').tap(args => args.map(arg => ({...arg, title: '阴阳师斗技阵容胜率查询'})))
 
