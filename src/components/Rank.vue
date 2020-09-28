@@ -41,18 +41,9 @@
   </div>
 </template>
 
-<script type="ts">
-
-import {Vue} from "vue-property-decorator";
-import {Divider, Icon, PageHeader, Progress, Table} from "ant-design-vue";
+<script>
 import rankTable from "../../data/shishen_rank.json"
 import Hero from "./Hero";
-
-Vue.use(PageHeader)
-Vue.use(Table)
-Vue.use(Icon)
-Vue.use(Divider)
-Vue.use(Progress)
 
 export default {
   name: "Rank",

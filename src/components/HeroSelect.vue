@@ -17,7 +17,7 @@
   </a-cascader>
 </template>
 
-<script type="ts">
+<script>
 
 import heroTable from "../../data/shishen.json"
 import pinyin from "@/utils/pinyin";
