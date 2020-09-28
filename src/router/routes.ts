@@ -1,6 +1,6 @@
 import config from "@/config";
 
-const WinRate = () => import("@/components/WinRate.vue");
+const WinRate = () => import("@/modules/win-rate/components/WinRate.vue");
 const Rank = () => import("@/components/Rank.vue");
 const Recommend = () => import("@/components/Recommend.vue");
 const MoreTools = () => import("@/components/MoreTools.vue");

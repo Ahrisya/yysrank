@@ -1,5 +1,5 @@
 import isContained from "@/utils/arrays";
-import battleTable from "../../data/data.json";
+import battleTable from "../../../data/data.json";
 import * as _ from "underscore";
 
 export const beautifyOutput = (list, input) =>
