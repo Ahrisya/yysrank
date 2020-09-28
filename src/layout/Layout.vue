@@ -30,6 +30,7 @@
           :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
       >
         <router-view/>
+        <UpdateTips/>
       </a-layout-content>
     </a-layout>
   </a-layout>
@@ -37,17 +38,15 @@
 
 <script>
 import config from "@/config";
-import {updateTips} from "@/components/UpdateTips";
+import UpdateTips from "@/components/UpdateTips";
 
 export default {
   name: "Layout",
+  components: {UpdateTips},
   watch: {
     $route() {
       this.refreshTitle();
     }
-  },
-  mounted() {
-    updateTips();
   },
   methods: {
     refreshTitle() {
