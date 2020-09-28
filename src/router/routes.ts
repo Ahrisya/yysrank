@@ -1,10 +1,10 @@
 import config from "@/config";
 
 const WinRate = () => import("@/modules/win-rate/components/WinRate.vue");
-const Rank = () => import("@/components/Rank.vue");
-const Recommend = () => import("@/components/Recommend.vue");
-const MoreTools = () => import("@/components/MoreTools.vue");
-const Tutorial = () => import("@/components/Tutorial.vue");
+const Rank = () => import("@/modules/rank/components/Rank.vue");
+const Recommend = () => import("@/modules/recommend/components/Recommend.vue");
+const MoreTools = () => import("@/modules/page/components/MoreTools.vue");
+const Tutorial = () => import("@/modules/page/components/Tutorial.vue");
 
 const routes = [
     {

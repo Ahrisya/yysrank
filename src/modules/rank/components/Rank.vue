@@ -42,8 +42,8 @@
 </template>
 
 <script>
-import rankTable from "../../data/shishen_rank.json"
-import Hero from "./Hero";
+import rankTable from "../../../../data/shishen_rank.json"
+import Hero from "../../../components/Hero";
 
 export default {
   name: "Rank",
