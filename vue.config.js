@@ -18,11 +18,11 @@ module.exports = {
             .test(/\.md$/)
             .use('frontmatter-markdown-loader')
             .loader('frontmatter-markdown-loader')
-        // .tap(options => {
-        //     return {
-        //         mode: [Mode.VUE_COMPONENT]
-        //     }
-        // })
+            .tap(options => {
+                return {
+                    mode: [Mode.HTML] // 这是默认值
+                }
+            })
 
         config.plugin('html').tap(args => args.map(arg => ({...arg, title: '阴阳师斗技阵容胜率查询'})))
 
@@ -31,6 +31,7 @@ module.exports = {
         //     .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin);
 
         // 目前没有需要CDN加速的模块
+        /**
         config.plugin('webpack-cdn-plugin')
             .use(require('webpack-cdn-plugin'),
                 [
@@ -67,5 +68,6 @@ module.exports = {
                     }
                 ]
             )
+        **/
     }
 };
