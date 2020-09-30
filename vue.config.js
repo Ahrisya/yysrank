@@ -1,6 +1,13 @@
 // vue.config.js
 module.exports = {
     chainWebpack: config => {
+        config
+            .entry('chunk-common')
+            .add('./data/data.json')
+            .add('./data/shishen.json')
+            .add('./data/shishen_rank.json')
+            .end()
+
         config.resolve
             .alias
             .set('vue$', 'vue/dist/vue.esm.js')

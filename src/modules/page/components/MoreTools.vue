@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import tools from "@/page/more-tools";
+import tools from "@/modules/more-tools";
 
 export default {
   name: "MoreTools",
