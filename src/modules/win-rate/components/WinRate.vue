@@ -125,30 +125,37 @@ import * as _ from "underscore";
 import isContained from "@/utils/arrays";
 import HeroIcon from "@/components/HeroIcon";
 import getReports from "../battles";
-import data from "@/data";
+import store from "@/store";
 
 export default {
   name: "WinRate",
   components: {HeroIcon, HeroSelect},
   props: ['title'],
   data() {
-    data();
     return {
       form: this.$form.createForm(this, {name: 'advanced_search'}),
       visible: false,
       data: [],
-      histories: [],
     };
+  },
+  computed: {
+    histories() {
+      return this.$store.state.histories;
+    }
   },
   methods: {
     showModal() {
       this.visible = true;
     },
     handleOk() {
-      this.visible = false;
+      this.handleClose();
     },
     handleCancel() {
+      this.handleClose();
+    },
+    handleClose() {
       this.visible = false;
+      this.data = [];
     },
     handleReset() {
       this.form.resetFields();
@@ -184,6 +191,9 @@ export default {
         });
         return;
       }
+
+      store.commit('search', {});
+
       const reports = getReports(banList, thisTeamList, thatTeamList); // 核心逻辑
       this.data = reports;
       if (_.isEmpty(reports)) {
@@ -192,6 +202,9 @@ export default {
         });
         return;
       }
+
+      const historyKey = [banList.join('_'), thisTeamList.join('_'), thatTeamList.join('_')].join('|');
+
       const report = reports.map(report => {
         const {w, s} = report;
         return {w, s};
@@ -201,22 +214,16 @@ export default {
         return prev;
       });
 
-      const historyKey = [banList.join('_'), thisTeamList.join('_'), thatTeamList.join('_')].join('|');
+      store.commit('history', {
+        key: historyKey,
+        banList,
+        thisTeamList,
+        thatTeamList,
+        w: report.w,
+        s: report.s,
+        data: reports,
+      });
 
-      if (this.histories.find(history => history.key === historyKey) === undefined) {
-        this.histories.push(
-            {
-              key: historyKey,
-              banList,
-              thisTeamList,
-              thatTeamList,
-              w: report.w,
-              s: report.s,
-              data: reports,
-            }
-        )
-        this.histories = this.histories.map((history, index) => ({...history, index: index + 1}))
-      }
       this.showModal();
     },
 
