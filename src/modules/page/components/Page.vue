@@ -12,14 +12,14 @@
   </div>
 </template>
 
-<script type="ts">
+<script>
 import {Component, Prop} from "vue-property-decorator";
 
 @Component
 export default class Page extends Vue {
 
-  @Prop activeKey: string
-  @Prop tools: any
+  @Prop(String) activeKey
+  @Prop tools
 
 }
 </script>

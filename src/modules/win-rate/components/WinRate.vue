@@ -162,14 +162,12 @@ export default {
     },
     handleSearch(e) {
       e.preventDefault();
-      // eslint-disable-next-line @typescript-eslint/camelcase
+      /* eslint-disable @typescript-eslint/camelcase */
       const {this_ban, this_1, this_2, this_3, this_4, this_5, that_ban, that_1, that_2, that_3, that_4, that_5} = this.form.getFieldsValue();
-      // eslint-disable-next-line @typescript-eslint/camelcase
       const banList = _.without([this_ban, that_ban], undefined)
-      // eslint-disable-next-line @typescript-eslint/camelcase
       const thisTeamList = _.without([this_1, this_2, this_3, this_4, this_5], undefined)
-      // eslint-disable-next-line @typescript-eslint/camelcase
       const thatTeamList = _.without([that_1, that_2, that_3, that_4, that_5], undefined)
+      /* eslint-enable @typescript-eslint/camelcase */
 
       // 己方阵容不能为空
       if (_.isEmpty(thisTeamList)) {

@@ -14,7 +14,7 @@
 
 <script>
 
-import tutorials from "@/page/tutorials";
+import tutorials from "@/modules/tutorials";
 
 export default {
   name: "Tutorial",
