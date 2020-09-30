@@ -4,7 +4,7 @@
 
 <script>
 
-import heroTable from "../../data/shishen.json"
+import {HeroTable} from "@/data";
 
 export default {
   name: "HeroIcon",
@@ -19,6 +19,7 @@ export default {
     }
   },
   data() {
+    const heroTable = HeroTable();
     const hero = {...heroTable[this.id], id: undefined};
     delete hero.id;
     return hero;
