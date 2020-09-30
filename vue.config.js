@@ -38,8 +38,8 @@ module.exports = {
         config.plugin('html').tap(args => args.map(arg => ({...arg, title: '阴阳师斗技阵容胜率查询'})))
 
         // 分析包结构
-        config.plugin('webpack-bundle-analyzer')
-            .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin);
+        // config.plugin('webpack-bundle-analyzer')
+        //     .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin);
 
         // 目前没有需要CDN加速的模块
         /**
