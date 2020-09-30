@@ -3404,6 +3404,11 @@ detect-node@^2.0.4:
   resolved "https://registry.npm.taobao.org/detect-node/download/detect-node-2.0.4.tgz#014ee8f8f669c5c58023da64b8179c083a28c46c"
   integrity sha1-AU7o+PZpxcWAI9pkuBecCDooxGw=
 
+dexie@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.npm.taobao.org/dexie/download/dexie-3.0.2.tgz#4b979904d739e0530b68352005f175a82633a075"
+  integrity sha1-S5eZBNc54FMLaDUgBfF1qCYzoHU=
+
 diff@^4.0.1:
   version "4.0.2"
   resolved "https://registry.npm.taobao.org/diff/download/diff-4.0.2.tgz#60f3aecb89d5fae520c11aa19efc2bb982aade7d"

@@ -1,5 +1,5 @@
 interface AppState {
-    name?: string
+    histories: {}[]
 }
 
 export default AppState;
