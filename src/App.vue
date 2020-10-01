@@ -6,9 +6,9 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import {Component, Vue} from 'vue-property-decorator';
-import Layout from "@/components/Layout.vue";
+import Layout from "@/layout";
 import 'ant-design-vue/dist/antd.css'; // or 'ant-design-vue/dist/antd.less'
 
 @Component({

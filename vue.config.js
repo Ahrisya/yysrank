@@ -1,7 +1,18 @@
 // vue.config.js
 module.exports = {
     chainWebpack: config => {
-        config.resolve.alias.set('vue$', 'vue/dist/vue.esm.js');
+        config
+            .entry('chunk-common')
+            .add('./data/data.json')
+            .add('./data/shishen.json')
+            .add('./data/shishen_rank.json')
+            .end()
+
+        config.resolve
+            .alias
+            .set('vue$', 'vue/dist/vue.esm.js')
+        // .set('moment', 'moment/min/moment.min.js')
+        ;
         // const svgRule = config.module.rule('svg');
         // svgRule.uses.clear();
         // svgRule.use('url-loader')
@@ -11,6 +22,18 @@ module.exports = {
         //     .end()
 
         // scss 需要处理svg
+        const Mode = require('frontmatter-markdown-loader/mode')
+
+        config.module
+            .rule('markdown')
+            .test(/\.md$/)
+            .use('frontmatter-markdown-loader')
+            .loader('frontmatter-markdown-loader')
+            .tap(options => {
+                return {
+                    mode: [Mode.HTML] // 这是默认值
+                }
+            })
 
         config.plugin('html').tap(args => args.map(arg => ({...arg, title: '阴阳师斗技阵容胜率查询'})))
 
@@ -19,6 +42,7 @@ module.exports = {
         //     .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin);
 
         // 目前没有需要CDN加速的模块
+        /**
         config.plugin('webpack-cdn-plugin')
             .use(require('webpack-cdn-plugin'),
                 [
@@ -55,5 +79,6 @@ module.exports = {
                     }
                 ]
             )
+        **/
     }
 };
