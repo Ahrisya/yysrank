@@ -8,8 +8,8 @@ interface Config {
 }
 
 const config: Config = {
-    update: '10/05/2020',
-    range: '09/28-10/04',
+    update: '10/12/2020',
+    range: '10/05-10/12',
     routes: {
         'win-rate': {
             name: '阵容胜率排行',
