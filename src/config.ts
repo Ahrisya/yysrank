@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/member-delimiter-style */
 interface Config {
     update: string,
+    aiversion: string,
     range: string,
     routes: {
         [key: string]: {}
@@ -9,6 +10,7 @@ interface Config {
 
 const config: Config = {
     update: '10/26/2020',
+    aiversion: '1.0.0',
     range: '10/19-10/25',
     routes: {
         'win-rate': {
@@ -17,8 +19,8 @@ const config: Config = {
         'rank': {
             name: '排行榜',
         },
-        'recommend': {
-            name: '模拟翻牌',
+        'ai': {
+            name: '翻牌AI',
         },
         'more-tools': {
             name: '攻略&工具导航',

@@ -2,7 +2,7 @@ import config from "@/config";
 
 const WinRate = () => import("@/modules/win-rate/components/WinRate.vue");
 const Rank = () => import("@/modules/rank/components/Rank.vue");
-const Recommend = () => import("@/modules/recommend/components/Recommend.vue");
+const AI = () => import("@/modules/page/components/AI.vue");
 const MoreTools = () => import("@/modules/page/components/MoreTools.vue");
 const Tutorial = () => import("@/modules/page/components/Tutorial.vue");
 
@@ -24,11 +24,11 @@ const routes = [
         }
     },
     {
-        path: '/recommend',
-        component: Recommend,
+        path: '/ai',
+        component: AI,
         meta: {
-            title: "Recommend",
-            subTitle: "Under construction……",
+            title: "斗技翻牌AI——萌新(CuteRookie)",
+            subTitle: '仅供学习与娱乐，输赢概不负责，当前版本：' + config.aiversion
         }
     },
     {
