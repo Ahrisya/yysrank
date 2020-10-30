@@ -7,5 +7,3 @@ categories: intro
 
 模型每周一下午6点前更新，推荐使用GitHub clone下来，以省去手动更新的烦琐。
 
-暂时还只有Python版的，网页版的等我哪天想起来再做吧~
-
