@@ -10,7 +10,7 @@ interface Config {
 
 const config: Config = {
     update: '10/26/2020',
-    aiversion: '1.0.0',
+    aiversion: '1.0.1',
     range: '10/19-10/25',
     routes: {
         'win-rate': {
