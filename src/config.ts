@@ -9,9 +9,9 @@ interface Config {
 }
 
 const config: Config = {
-    update: '10/26/2020',
+    update: '11/02/2020',
     aiversion: '1.0.1',
-    range: '10/19-10/25',
+    range: '10/26-11/01',
     routes: {
         'win-rate': {
             name: '阵容胜率排行',
