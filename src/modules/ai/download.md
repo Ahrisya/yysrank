@@ -2,7 +2,7 @@
 title: 下载
 categories: download
 ---
-已经下载过的可以将除了assets文件夹以外，其他的文件全部直接覆盖，避免重复下载式神立绘资源耽误时间。
+已经下载过主程序的只需下载config.json和model文件夹，并将原程序目录下的相应文件替换即可。
 
 - GitHub：[https://github.com/Ahrisya/CuteRookie4User](https://github.com/Ahrisya/CuteRookie4User)
 
