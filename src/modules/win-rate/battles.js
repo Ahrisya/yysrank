@@ -1,4 +1,5 @@
 import isContained from "@/utils/arrays";
+import isIntersected from "@/utils/arrays2";
 import * as _ from "underscore";
 import {HeroBattleTable} from "@/data";
 
@@ -9,7 +10,7 @@ export const beautifyOutput = (list, input) =>
 
 const reports = (banList, thisTeamList, thatTeamList) => {
     let results = HeroBattleTable().data
-        .filter(battle => _.isEmpty(banList) || !(isContained(banList, battle.w) || isContained(banList, battle.l))) // 首先排除ban选的式神
+        .filter(battle => _.isEmpty(banList) || !(isIntersected(banList, battle.w) || isIntersected(banList, battle.l))) // 首先排除ban选的式神
         .filter(battle => !_.isEqual(battle.w, battle.l)) // 排除胜负双方阵容一致的
         .filter(battle => _.isEmpty(thisTeamList) || isContained(thisTeamList, battle.w) || isContained(thisTeamList, battle.l)) // 只看自己场的式神
         .filter(battle => _.isEmpty(thatTeamList) || isContained(thatTeamList, battle.w) || isContained(thatTeamList, battle.l)) // 只看对方场的式神
