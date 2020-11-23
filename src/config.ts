@@ -33,6 +33,9 @@ const config: Config = {
         },
     },
     contacts: {
+        'group': {
+            name: 'QQ交流群: 850716880',
+        },
         'qq': {
             name: 'QQ: 1282519861',
         },
