@@ -12,9 +12,9 @@ interface Config {
 }
 
 const config: Config = {
-    update: '11/16/2020',
-    aiversion: '1.1.2',
-    range: '11/09-11/15',
+    update: '11/23/2020',
+    aiversion: '1.1.3',
+    range: '11/16-11/22',
     routes: {
         'win-rate': {
             name: '阵容胜率排行',
@@ -38,6 +38,9 @@ const config: Config = {
         },
         'wechat': {
             name: '微信: ahrisyya'
+        },
+        'bili': {
+            name: '哔哩哔哩: Ahrisy'
         },
     },
 

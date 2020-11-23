@@ -84,6 +84,16 @@
           </template>
         </a-table-column>
       </a-table>
+      <a-row :gutter="[16,16]">
+          <a-col :span="24" :style="{  textAlign: 'center' }">
+            <a-button type="primary"  @click="deleteHistory">
+              清空历史记录
+            </a-button>
+            <!--          <a-button :style="{ marginLeft: '8px' }" @click="handleReset">-->
+            <!--            Reset-->
+            <!--          </a-button>-->
+          </a-col>
+        </a-row>
     </a-card>
     <a-modal
         :visible="visible"
@@ -231,6 +241,11 @@ export default {
       this.showModal();
     },
 
+    deleteHistory() {
+      this.histories.splice(0, this.histories.length)
+      store.commit('reset')
+      console.log(store.state)
+    },
   },
 }
 </script>

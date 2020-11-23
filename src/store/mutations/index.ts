@@ -27,3 +27,8 @@ export const history: Mutation<AppState> = (state: AppState, payload?: any) => {
             })
     })
 }
+
+export const reset: Mutation<AppState> = (state: AppState, payload?: any) => {
+    const {db} = data;
+    db.table('search_histories').clear()
+}
