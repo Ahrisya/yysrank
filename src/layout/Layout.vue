@@ -33,12 +33,38 @@
         <UpdateTips/>
       </a-layout-content>
     </a-layout>
+    <a-layout-footer :style="{ background: '#fff', padding: '0px'}" class="footer" >
+      <div class="logo"/>
+      <ul :style="{ display: 'inline' }">
+        <span> 更多资讯攻略： </span>
+        <li 
+            :style="{ display: 'inline-block', margin: '5px', opacity: '0.8', position: 'relative' }"
+            class="wechat"
+        >
+        <span class="text">阴阳痒痒鼠快讯</span>
+        <div class="QR-code-bai"></div>
+            
+        </li>
+      </ul>
+      <ul :style="{ display: 'inline' }">
+        <span> 联系作者 </span>
+        <li 
+            :style="{ display: 'inline-block', margin: '5px', opacity: '0.8' }"
+            v-for="(value,name) in contacts" :key="'/'+name"
+        >
+            {{ value.name }}
+        </li>
+      </ul>
+    </a-layout-footer>
+
   </a-layout>
 </template>
 
 <script>
 import config from "@/config";
 import UpdateTips from "@/components/UpdateTips";
+import "@/styles/qrcode.scss";
+
 
 export default {
   name: "Layout",
@@ -68,6 +94,7 @@ export default {
       activeRoute: '',
       subTitle: '',
       routes: {...config.routes},
+      contacts: {...config.contacts},
     };
   },
 }

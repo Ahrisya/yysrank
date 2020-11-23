@@ -1,0 +1,17 @@
+.wechat{
+	cursor: pointer;	// 鼠标移入有小手
+	&:hover .QR-code-bai{	// hover，点到就显示
+		display: block;
+	}
+
+	.QR-code-bai{
+		width: 200px;
+		height: 200px;
+		background: url("qrcodes/bai.jpg");
+		background-size: 100%;	// 和父div同长宽
+		position: absolute;	// 绝对定位，需要父级或者祖先元素有一个`position: relative`;
+		right: 0px;	// 移动你想要的位置
+		bottom: 25px;
+		display: none;  // 默认关掉
+	}
+}

@@ -6,6 +6,9 @@ interface Config {
     routes: {
         [key: string]: {}
     },
+    contacts: {
+        [key: string]: {}
+    },
 }
 
 const config: Config = {
@@ -29,5 +32,14 @@ const config: Config = {
             name: '食用指南',
         },
     },
+    contacts: {
+        'qq': {
+            name: 'QQ: 1282519861',
+        },
+        'wechat': {
+            name: '微信: ahrisyya'
+        },
+    },
+
 }
 export default config;
